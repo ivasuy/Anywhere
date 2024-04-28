@@ -1,0 +1,107 @@
+#loginPage {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  // width: 60vh;
+
+  #mid {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    h1 {
+      font: 300 2.5vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
+    }
+
+    button {
+      width: 30vw;
+      height: 7vh;
+      margin: 10px;
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease-in;
+      font: 300 1.2vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
+    }
+    button:hover {
+      background-color: rgb(157, 157, 157);
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    p {
+      text-align: center;
+      width: 20vw;
+      font: 300 1vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
+    }
+    #signupBut {
+      background-color: black;
+      color: white;
+    }
+    #signupBut:hover {
+      background-color: rgb(157, 157, 157);
+    }
+  }
+  #right {
+    flex: 6;
+    // border: 2px solid red;
+
+    // height: fit-content;
+    animation: example 10s infinite;
+    // animation-duration: 4s;
+    // max-width: 40vw;
+
+    padding: 20px;
+    background-color: red;
+    // min-width: 80vw;
+    // transition: background-color ease-in 1s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    span {
+      font: 200 7vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
+    }
+  }
+}
+// #right:hover {
+//   background-image: linear-gradient(to bottom right, red, yellow);
+// }
+@keyframes example {
+  0% {
+    background-color: red;
+  }
+  25% {
+    background-color: yellow;
+  }
+  50% {
+    background-color: rgb(191, 191, 255);
+  }
+  100% {
+    background-color: rgb(83, 228, 83);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #loginPage {
+    display: flex;
+    justify-content: center;
+    flex-direction: column-reverse;
+    align-items: center;
+    margin: 0;
+    height: fit-content;
+    #mid {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10vh;
+    }
+    #right {
+      height: fit-content;
+      margin-top: 10vh;
+    }
+  }
+}

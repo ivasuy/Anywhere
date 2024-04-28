@@ -1,0 +1,295 @@
+#homePage {
+  #mid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    // text-align: center;
+
+    h1 {
+      font: 300 4vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
+    }
+  }
+
+  #bottom {
+    #bottom-right {
+      button {
+        height: 5vmax; // Adjust height and width for responsiveness
+        width: 5vmax;
+        position: fixed;
+        bottom: 10vh;
+        right: 5vw;
+        font-size: 4vmax; // Adjust font size for responsiveness
+        border: none;
+        background-color: rgb(252, 0, 0);
+        border-radius: 5px;
+      }
+
+      button:hover {
+        background-color: yellow;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+/* Search bar container */
+.search-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  text-decoration: none;
+  max-width: 100%; // Change max-width to ensure responsiveness
+}
+
+/* Search icon */
+.search-icon {
+  cursor: pointer;
+}
+
+/* Search bar with transition */
+.search-bar {
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 100%;
+  transition: width 1s;
+  /* Transition width property */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+}
+
+input {
+  font-size: 2vh;
+  border-bottom: 2px solid black;
+}
+
+.searchButton {
+  background-color: black;
+  color: white;
+  border: none;
+  height: 4vh;
+  width: 8vw;
+  margin-left: 2vh;
+  border-radius: 3px;
+  transition: all ease-in 0.8s;
+  display: none;
+}
+.searchButton:hover {
+  color: black;
+  background-color: white;
+  box-shadow: hotpink;
+  border: 1px solid black;
+}
+
+/* Search bar open */
+.search-bar.open {
+  width: 50vw;
+  /* Adjust width as needed */
+}
+
+/* Input field */
+.search-bar input[type="text"] {
+  width: 80vh;
+  padding: 10px;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 1px solid #000;
+  outline: none;
+}
+
+.modal {
+  display: flex;
+  position: relative;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
+  overflow: scroll; // Change overflow to auto for scrolling on smaller screens
+  // scroll-behavior: auto;
+}
+
+// .close {
+//   color: #aaa;
+//   float: right;
+//   font-size: 28px;
+//   font-weight: bold;
+//   cursor: pointer;
+// }
+
+// .close:hover {
+//   color: black;
+// }
+
+#close-newNote {
+  z-index: 2;
+  svg {
+    position: fixed;
+    right: 20vw;
+    z-index: 2 !important; // Adjust position for smaller screens
+    top: 5vh; // Adjust position for smaller screens
+    // font-size: 4vw; // Adjust font size for responsiveness
+  }
+}
+#close-newNote:hover {
+  cursor: pointer;
+}
+
+// #all-notes {
+//   // border: 2px solid red;
+//   // padding: 10px;
+//   display: flex;
+//   flex-direction: column-reverse;
+//   margin-top: 10vh;
+//   width: 80vw;
+//   // justify-content: center;
+//   // align-items: center;
+//   #post_list {
+//     border: 1px solid black;
+//     margin: 50px;
+//     span {
+//       border: 1px solid black;
+//       background-color: aqua;
+//       border-radius: 4px;
+//     }
+//   }
+// }
+
+// #empty-notes {
+//   text-align: center;
+// }
+
+/* Styles for the container of all notes */
+#all-notes {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  // max-width: 80vw;
+  a {
+    text-decoration: none;
+  }
+}
+
+#comp_post {
+  height: 50vh;
+}
+
+/* Styles for individual note items */
+#post_list {
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 10px;
+  height: 50vh;
+  overflow: scroll;
+  transition: transform 0.6s ease-out; /* Add transition for smooth effect */
+}
+
+#comp_list {
+  height: 45vh;
+}
+
+#post_list:hover {
+  transform: scale(1.05); /* Scale the element slightly on hover */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add box shadow on hover */
+  cursor: pointer;
+}
+
+/* Styles for note title */
+#post_list h2 {
+  margin-top: 0;
+  color: #333333;
+}
+
+/* Styles for note description */
+#post_description {
+  color: #666666;
+}
+
+/* Styles for edit button */
+#btn {
+  display: inline-block;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  padding: 8px 16px;
+  height: 5vh;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+#btn:hover {
+  background-color: #0056b3;
+  cursor: pointer;
+}
+
+/* Styles for empty notes message */
+#empty-notes {
+  text-align: center;
+  color: #999999;
+  margin-top: 20px;
+}
+
+.created-date {
+  color: #666; /* Example color */
+  font-size: 14px; /* Example font size */
+  /* Add more styles as needed */
+}
+#search-info {
+  font: 300 1vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+    sans-serif;
+  max-width: 20vw;
+  text-align: center;
+  margin: 10px;
+}
+
+.sort-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 10px;
+  margin: 10px;
+}
+
+.sort-button:hover {
+  background-color: #0056b3;
+}
+
+@media screen and (max-width: 600px) {
+  #close-newNote {
+    svg {
+      position: absolute;
+      right: 10vw;
+      top: 2vh;
+    }
+  }
+
+  #all-notes {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    width: 100%;
+  }
+
+  /* Styles for individual note items */
+  #post_list {
+    max-width: 100vw;
+    overflow: auto;
+  }
+}
