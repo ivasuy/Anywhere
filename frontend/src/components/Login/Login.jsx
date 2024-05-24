@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import PersonIcon from '@material-ui/icons/Person';
 
-// import "./login.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, login } from "../../actions/userAction";
@@ -70,9 +69,8 @@ const Login = () => {
                             onChange={(e) => setpassword(e.target.value)}
                         />
                     </div>
-                    <div id="forgotpass">
-
-                        <Link to="/password/forgot">Forgot Password ?</Link>
+                    <div id="forgotpass" >
+                        <Link to="/password/forgot" style={{ color: "white" }}>Forgot Password ?</Link>
                     </div>
                     <input type="submit" value="Login" id="loginBtn" />
                 </form>

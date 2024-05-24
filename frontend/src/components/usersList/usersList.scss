@@ -1,0 +1,56 @@
+.usersContainer {
+  display: flex;
+
+  .usersList {
+    overflow-y: auto; /* Add overflow-y property to enable vertical scrolling */
+    max-height: 100vh; /* Limit the maximum height of usersList */
+    width: 30vw;
+    border-right: 0.8px solid rgb(157, 157, 157);
+    text-align: center;
+
+    h1 {
+      font: 300 2.5vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
+    }
+
+    .userDetails {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 10px;
+      border-bottom: 0.1px dotted rgb(157, 157, 157);
+
+      img {
+        object-fit: cover;
+        height: 10vh;
+        border-radius: 4px;
+        margin: 10px;
+      }
+
+      span {
+        margin: 10px;
+      }
+    }
+
+    .userDetails:hover {
+      cursor: pointer;
+    }
+  }
+
+  // .moreUserDetails {
+  //   background-color: rgb(187, 186, 186);
+  //   width: 50vw;
+  //   position: absolute;
+  //   left: 30vw;
+  // }
+}
+
+@media screen and (max-width: 800px) {
+  .usersContainer {
+    width: 100vw;
+    // border: 2px solid red;
+  }
+  .usersList {
+    width: 100vw !important;
+  }
+}

@@ -6,8 +6,10 @@
   height: fit-content;
   // background-image: linear-gradient(to right, #fed4d5, #eeeeee);
   align-items: center;
+
   #loginImage {
     text-align: center;
+
     h1 {
       font: 300 4vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
         sans-serif;
@@ -28,6 +30,7 @@
 
   #loginHead {
     position: relative;
+
     // top: 10px;
     // background-color: red;
     h1 {
@@ -35,9 +38,11 @@
         sans-serif;
     }
   }
+
   #loginHead:hover {
     border-radius: 10px;
   }
+
   form {
     display: flex;
     justify-content: center;
@@ -48,15 +53,18 @@
     max-width: 100vw;
 
     text-align: end;
+
     h1 {
       font: 300 2.5vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
         sans-serif;
     }
+
     #forgotpass {
       // background-color: red;
       text-align: end;
       width: 32vw;
       margin: 10px;
+
       a {
         font-style: none;
         color: black;
@@ -67,31 +75,42 @@
           sans-serif;
       }
     }
+
     #loginUsername {
       display: flex;
       justify-content: center;
       align-items: center;
+
       input {
         height: 5vh;
         width: 30vw;
         border: none;
-        border-bottom: 0.5px solid black;
+        border-bottom: 0.2px solid white;
         margin: 10px;
         background-color: transparent;
+        border-radius: 10px;
+        padding: 10px;
+        color: white;
       }
     }
+
     #loginPassword {
       display: flex;
       justify-content: center;
       align-items: center;
+
       input {
         height: 5vh;
         width: 30vw;
         border: none;
-        border-bottom: 0.5px solid black;
+        border-bottom: 0.2px solid white;
         margin: 10px;
         background-color: transparent;
+        border-radius: 10px;
+        padding: 10px;
+        color: white
       }
+
     }
 
     #loginBtn {
@@ -104,35 +123,43 @@
       font: 300 1.2vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
         sans-serif;
     }
+
     #loginBtn:hover {
       background-color: rgb(157, 157, 157);
       border-radius: 10px;
       cursor: pointer;
     }
+
     p {
       text-align: center;
       width: 20vw;
       font: 300 1vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
         sans-serif;
     }
+
     #signupBut {
       background-color: black;
       color: white;
     }
   }
+
   #right {
     // flex: 1;
     // border: 2px solid red;
     height: fit-content;
     padding: 20px;
+
     span {
       font: 200 3.5vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
         sans-serif;
     }
   }
+
 }
 
-@media screen and (max-width: 600px) {
+
+
+@media screen and (max-width: 800px) {
   .loginRegisterContainer {
     display: flex;
     flex-direction: column;
@@ -147,11 +174,13 @@
 
       #loginUsername {
         margin: 10px;
+
         input {
           width: 70vw;
           height: 7vh;
         }
       }
+
       #loginPassword {
         margin: 0px;
 
@@ -160,18 +189,18 @@
           height: 7vh;
         }
       }
+
       #loginHead {
         position: relative;
         top: 60px;
+
         // background-color: red;
         h1 {
           font: 300 8vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
             sans-serif;
         }
       }
-      form {
-        // max-width: 100vw;
-      }
+
     }
   }
 }

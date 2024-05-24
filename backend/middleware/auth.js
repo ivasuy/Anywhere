@@ -1,8 +1,9 @@
-const jwt = require("jsonwebtoken");
-const userModel = require('../models/userModel');
-const ErrorHandler = require("../utils/errorHandler");
+import jwt from 'jsonwebtoken';
+import userModel from '../models/userModel.js';
+import { ErrorHandler } from '../utils/errorHandler.js';
 
-exports.isAuthenticated = async (req, res, next) => {
+
+export const isAuthenticated = async (req, res, next) => {
 
     try {
         const { token } = req.cookies;

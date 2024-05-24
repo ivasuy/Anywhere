@@ -1,6 +1,7 @@
 import React from "react";
 import "./loginRedirect.scss";
 import { Link } from "react-router-dom";
+import HomeLoader from "../../components/HomeLoader/HomeLoader"
 
 
 const LoginRedirect = () => {
@@ -29,6 +30,8 @@ const LoginRedirect = () => {
             </div>
             <div id="right">
                 <span>Anywhere</span>
+
+                {/* <HomeLoader /> */}
             </div>
         </div>
     );

@@ -1,0 +1,84 @@
+#fl-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#floating-nav {
+  position: fixed;
+  bottom: 20px;
+  //   right: 35%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  min-width: fit-content;
+  width: 30vw;
+  border-radius: 10px;
+  //   background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgb(255, 255, 255);
+  box-shadow: 2px 4px 7px goldenrod;
+  z-index: 1;
+  padding: 10px;
+}
+
+#floating-nav a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  text-decoration: none;
+  color: rgb(58, 58, 58);
+  transition: background-color 0.3s ease;
+}
+
+#floating-nav a:hover {
+  background-color: #edece5;
+  border-radius: 5px;
+  //   padding: 10px;
+}
+
+#floating-nav a.active {
+  background-color: rgb(255, 165, 0);
+
+  padding: 10px;
+  border-radius: 10px;
+  //   color: white;
+  color: black;
+  width: fit-content;
+}
+
+#floating-nav a svg {
+  transition: transform 0.8s ease-in-out;
+}
+
+#floating-nav a:hover svg,
+#floating-nav a.active svg {
+  transform: scale(1.2);
+}
+
+#floating-nav a span {
+  display: none;
+  padding: 15px;
+  text-decoration: none;
+  font: 250 1.4vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+    sans-serif;
+  color: black;
+}
+
+#floating-nav a span.activeDesc {
+  display: block;
+}
+
+@media screen and (max-width: 700px) {
+  #floating-nav {
+    width: 50vw;
+    // left: 0;
+    border-radius: 10px;
+    //   background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgb(255, 255, 255);
+    box-shadow: 2px 4px 4px rgba(255, 192, 3, 0.7);
+    z-index: 1;
+    padding: 0px;
+  }
+}

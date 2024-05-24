@@ -1,16 +1,21 @@
-const express = require("express");
-const errorMiddleware = require("./middleware/error");
-const userRouter = require("./routes/userRoute");
+import express from "express";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import bodyParser from "body-parser";
+import userRouter from "./routes/userRoute.js";
+import locationRouter from "./routes/locationRoute.js";
+import { errorMiddleware } from "./middleware/error.js";
+import chatRouter from "./routes/chatRoute.js";
+import { createUser } from "./seeders/userSeed.js";
 
-const cookieParser = require("cookie-parser");
-const cors = require("cors");
-const bodyParser = require("body-parser");
 
 
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// createUser(10);
 
 
 app.use(cors({
@@ -22,7 +27,9 @@ app.use(cors({
 
 // app.use("api/v1/", dataRouter)
 app.use("/api/v1", userRouter)
+app.use("/api/v1", locationRouter)
+app.use("/api/v1/chat", chatRouter)
 
 app.use(errorMiddleware);
 
-module.exports = app;
+export default app;

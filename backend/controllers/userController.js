@@ -1,9 +1,12 @@
-const userModel = require("../models/userModel")
-const ErrorHandler = require('../utils/errorHandler');
-const sendToken = require('../utils/jwtToken');
+import { TryCatch } from "../middleware/error.js";
+import userModel from "../models/userModel.js";
+// import { ErrorHandler } from '../utils/errorHandler.js';
+import { ErrorHandler } from '../utils/errorHandler.js';  // Corrected import statement
+import { sendToken } from '../utils/jwtToken.js';
 
 
-exports.registerUser = async (req, res, next) => {
+
+export const registerUser = async (req, res, next) => {
 
     try {
         const { name, email, username, password } = req.body;
@@ -31,7 +34,7 @@ exports.registerUser = async (req, res, next) => {
     }
 }
 
-exports.loginUser = async function (req, res, next) {
+export const loginUser = async function (req, res, next) {
 
     try {
 
@@ -67,10 +70,10 @@ exports.loginUser = async function (req, res, next) {
     }
 }
 
-exports.logoutUser = (req, res) => {
+export const logoutUser = (req, res) => {
 
     try {
-        res.cookie("token", null, {
+        res.cookie("token", "", {
             expires: new Date(Date.now()),
             httpOnly: true,
         });
@@ -85,7 +88,7 @@ exports.logoutUser = (req, res) => {
 }
 
 //Get user Details
-exports.getUserDetails = async function (req, res, next) {
+export const getUserDetails = async function (req, res, next) {
     try {
         const user = await userModel.findById(req.user.id);
 
@@ -99,3 +102,9 @@ exports.getUserDetails = async function (req, res, next) {
         console.log("error in getUserDetails:", error);
     }
 }
+
+//Search user
+export const searchUser = TryCatch(async (req, res) => {
+    const { name } = req.query;
+
+})

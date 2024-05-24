@@ -1,7 +1,8 @@
-const mongoose = require('mongoose');
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const validator = require("validator");
+import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import validator from 'validator';
+
 
 
 const userSchema = mongoose.Schema({
@@ -78,13 +79,14 @@ const userSchema = mongoose.Schema({
     location: {
         type: {
             type: String,
-            enum: ["Point"],
-            default: "Point",
+            enum: ['Point'], // GeoJSON type
+            default: 'Point',
         },
         coordinates: {
-            type: [Number],
-            index: "2dsphere",
-        },
+            type: [Number], // Array of [longitude, latitude]
+            index: '2dsphere', // Create 2dsphere index for geospatial queries
+            default: [0, 0]
+        }
     },
     createdAt: {
         type: Date,
@@ -93,7 +95,12 @@ const userSchema = mongoose.Schema({
 
     resetPasswordToken: String,
     resetPasswordExpire: Date,
+}, {
+    timestamps: true
 })
+
+userSchema.index({ location: '2dsphere' });
+
 
 // JWT Token
 userSchema.methods.getJWTToken = function () {
@@ -116,4 +123,6 @@ userSchema.pre("save", async function (next) {
     this.password = await bcrypt.hash(this.password, 10);
 });
 
-module.exports = mongoose.model("UserModel", userSchema);
+const userModel = mongoose.model("UserModel", userSchema);
+
+export default userModel; // Export UserModel as default

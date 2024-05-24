@@ -1,6 +1,6 @@
-const ErrorHandler = require("../utils/errorHandler");
+import { ErrorHandler } from "../utils/errorHandler.js";
 
-module.exports = (err, req, res, next) => {
+const errorMiddleware = (err, req, res, next) => {
     err.statusCode = err.statusCode || 500;
     err.message = err.message || "Internal Server Error";
 
@@ -33,3 +33,14 @@ module.exports = (err, req, res, next) => {
         message: err.message,
     });
 };
+
+const TryCatch = (passedFunc) => async (req, res, next) => {
+    try {
+        await passedFunc(req, res, next);
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+};
+
+export { errorMiddleware, TryCatch };

@@ -1,7 +1,9 @@
-const app = require("./app");
-// const cloudinary = require("cloudinary");
-const { connectDatabase } = require("./config/database");
-const bodyParser = require("body-parser");
+import app from "./app.js";
+// import cloudinary from "cloudinary"; // Example import, if needed
+import connectDatabase from "./config/database.js";
+import bodyParser from "body-parser";
+import dotenv from 'dotenv';
+
 
 // Handling Uncaught Exception
 process.on("uncaughtException", (err) => {
@@ -11,8 +13,8 @@ process.on("uncaughtException", (err) => {
 });
 
 // Config
-if (process.env.NODE_ENV !== "PRODUCTION") {
-    require("dotenv").config({ path: "backend/config/config.env" });
+if (process.env.NODE_ENV !== 'production') {
+    dotenv.config({ path: 'backend/config/config.env' });
 }
 
 // app.use(

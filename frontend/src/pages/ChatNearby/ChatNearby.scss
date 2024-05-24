@@ -1,0 +1,76 @@
+.chatNearby-top {
+  //   #distText {
+  //     text-align: center;
+  //   }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-bottom: 1px solid black;
+
+  h1 {
+    font: 200 3vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif;
+  }
+}
+#distanceSlider {
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  //   border: 2px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#distText {
+  margin-bottom: 10px;
+  max-width: 150px;
+  text-align: center;
+  font: 400 1vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+    sans-serif;
+}
+
+#userListChatNearby {
+  display: flex;
+  flex-direction: row;
+  // justify-content: center;
+  align-items: center;
+  #mapViewUsersList {
+    width: 70vw;
+    border: 2px solid red;
+    height: 100vh;
+  }
+}
+
+#toggle-button {
+  display: none;
+}
+
+// #mapViewUsersList {
+//   display: none;
+// }
+
+#fetchButton {
+  width: 15vw;
+  margin: 20px;
+  background: transparent;
+  border: none;
+  background-color: red;
+  padding: 10px;
+}
+
+@media screen and (max-width: 800px) {
+  #distanceSlider {
+    width: 60vw;
+  }
+
+  #toggle-button {
+    display: block;
+  }
+  #userListChatNearby {
+    display: flex;
+    flex-direction: column;
+    #mapViewUsersList {
+      width: 100vw;
+    }
+  }
+}
