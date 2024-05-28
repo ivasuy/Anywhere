@@ -37,21 +37,21 @@ const FloatingNav = () => {
         <div id='fl-nav'>
             <div id="floating-nav">
                 <Link to="/my-feed" id="myfeed" className={location.pathname === '/my-feed' ? 'active' : ''}>
-                    <ViewQuiltOutlinedIcon fontSize="large" />
+                    <ViewQuiltOutlinedIcon fontSize="large" style={{ color: "white" }} />
                     <span className={location.pathname === '/my-feed' ? 'activeDesc' : ''}> My Feed</span>
 
                 </Link>
                 <Link to="/explore-nearby" id="explore-nearby" className={location.pathname === '/explore-nearby' ? 'active' : ''}>
-                    <PeopleIcon fontSize="large" />
+                    <PeopleIcon fontSize="large" style={{ color: "white" }} />
                     <span className={location.pathname === '/explore-nearby' ? 'activeDesc' : ''}> Explore Nearby</span>
 
                 </Link>
                 <Link to="/explore-world" id="explore-world" className={location.pathname === '/explore-world' ? 'active' : ''}>
-                    <PublicIcon fontSize="large" />
+                    <PublicIcon fontSize="large" style={{ color: "white" }} />
                     <span className={location.pathname === '/explore-world' ? 'activeDesc' : ''}> Explore World</span>
                 </Link>
                 <Link to="/myself" id="myself" className={location.pathname === '/myself' ? 'active' : ''}>
-                    <PersonIcon fontSize="large" />
+                    <PersonIcon fontSize="large" style={{ color: "white" }} />
                     <span className={location.pathname === '/myself' ? 'activeDesc' : ''}> My profile</span>
                 </Link>
             </div >

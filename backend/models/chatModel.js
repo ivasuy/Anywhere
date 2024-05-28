@@ -14,6 +14,16 @@ const schema = new Schema(
             type: Types.ObjectId,
             ref: "UserModel",
         },
+        avatar: {
+            public_id: {
+                type: String,
+                // required: true,
+            },
+            url: {
+                type: String,
+                // required: true,
+            },
+        },
         members: [
             {
                 type: Types.ObjectId,

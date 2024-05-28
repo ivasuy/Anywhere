@@ -12,12 +12,13 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  min-width: fit-content;
-  width: 30vw;
+  // width: fit-content;
+  width: 22vw;
+  height: 4vh;
   border-radius: 10px;
   //   background-color: rgba(255, 255, 255, 0.9);
-  background-color: rgb(255, 255, 255);
-  box-shadow: 2px 4px 7px goldenrod;
+  background-color: rgba(124, 124, 124, 0.261);
+  // box-shadow: 2px 4px 7px rgb(255, 255, 255);
   z-index: 1;
   padding: 10px;
 }
@@ -33,13 +34,15 @@
 }
 
 #floating-nav a:hover {
-  background-color: #edece5;
+  background-color: #000000;
   border-radius: 5px;
   //   padding: 10px;
 }
 
 #floating-nav a.active {
-  background-color: rgb(255, 165, 0);
+  background-color: rgb(0, 110, 255);
+  height: 5vh;
+  // background-color: rgb(0, 187, 187);
 
   padding: 10px;
   border-radius: 10px;
@@ -76,8 +79,8 @@
     // left: 0;
     border-radius: 10px;
     //   background-color: rgba(255, 255, 255, 0.9);
-    background-color: rgb(255, 255, 255);
-    box-shadow: 2px 4px 4px rgba(255, 192, 3, 0.7);
+    // background-color: rgb(255, 255, 255);
+    // box-shadow: 2px 4px 4px rgba(255, 192, 3, 0.7);
     z-index: 1;
     padding: 0px;
   }

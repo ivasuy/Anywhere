@@ -7,6 +7,17 @@ import { fetchUsers } from "../../actions/locationAction"
 
 const UsersList = () => {
     const [showDetails, setShowDetails] = useState(false);
+    const allUsers = useSelector((state) => state.location_users);
+
+    useEffect(() => {
+        console.log("lode ka", allUsers.users)
+        console.log()
+    }, [allUsers])
+
+    const handleUserClick = () => {
+
+    }
+
 
 
     return (
@@ -14,61 +25,23 @@ const UsersList = () => {
         <div className='usersContainer'>
             <div className='usersList' >
                 <h1>Nearby users</h1>
-                <div className="userDetails" onClick={() => { setShowDetails(!showDetails) }}>
+                {allUsers && allUsers.users.length > 0 ? (
+                    allUsers.users.map((user, index) => (
+                        <div className="userDetails" key={index} onClick={() => handleUserClick(user)}>
+                            <img src={userFace} alt="userImage" />
+                            <span>{user.name}</span>
+                        </div>
+                    ))
+                ) : (
+                    <div id='emptyUserList'>No users to display</div>
+                )}
+
+                {/* <div className="userDetails" onClick={() => { setShowDetails(!showDetails) }}>
                     <img src={userFace} alt="userImage" />
-                    <span>John doe</span>
+                    <span>John dMoe</span>
                     <span>{showDetails}</span>
-                </div>
-                <div className="userDetails" onClick={() => { setShowDetails(!showDetails) }}>
-                    <img src={userFace} alt="userImage" />
-                    <span>John doe</span>
-                    <span>{showDetails}</span>
-                </div>
-                <div className="userDetails" onClick={() => { setShowDetails(!showDetails) }}>
-                    <img src={userFace} alt="userImage" />
-                    <span>John doe</span>
-                    <span>{showDetails}</span>
-                </div>
-                <div className="userDetails" onClick={() => { setShowDetails(!showDetails) }}>
-                    <img src={userFace} alt="userImage" />
-                    <span>John doe</span>
-                    <span>{showDetails}</span>
-                </div>
-                <div className="userDetails" onClick={() => { setShowDetails(!showDetails) }}>
-                    <img src={userFace} alt="userImage" />
-                    <span>John doe</span>
-                    <span>{showDetails}</span>
-                </div>
-                <div className="userDetails" onClick={() => { setShowDetails(!showDetails) }}>
-                    <img src={userFace} alt="userImage" />
-                    <span>John doe</span>
-                    <span>{showDetails}</span>
-                </div>
-                <div className="userDetails" onClick={() => { setShowDetails(!showDetails) }}>
-                    <img src={userFace} alt="userImage" />
-                    <span>John doe</span>
-                    <span>{showDetails}</span>
-                </div>
-                <div className="userDetails" onClick={() => { setShowDetails(!showDetails) }}>
-                    <img src={userFace} alt="userImage" />
-                    <span>John doe</span>
-                    <span>{showDetails}</span>
-                </div>
-                <div className="userDetails" onClick={() => { setShowDetails(!showDetails) }}>
-                    <img src={userFace} alt="userImage" />
-                    <span>John doe</span>
-                    <span>{showDetails}</span>
-                </div>
-                <div className="userDetails" onClick={() => { setShowDetails(!showDetails) }}>
-                    <img src={userFace} alt="userImage" />
-                    <span>John doe</span>
-                    <span>{showDetails}</span>
-                </div>
-                <div className="userDetails" onClick={() => { setShowDetails(!showDetails) }}>
-                    <img src={userFace} alt="userImage" />
-                    <span>John doe</span>
-                    <span>{showDetails}</span>
-                </div>
+                </div> */}
+
             </div>
             {showDetails && (
                 <div className="moreUserDetails">

@@ -42,12 +42,12 @@ const Home = () => {
         if (isAuthenticated) {
             setTimeout(() => {
                 navigate("/my-feed")
-            }, 4000);
+            }, 10000);
         }
         else {
             setTimeout(() => {
                 navigate("/login-redirect")
-            }, 3000);
+            }, 10000);
         }
     }, [isAuthenticated]);
 

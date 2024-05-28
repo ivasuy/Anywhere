@@ -12,7 +12,7 @@ export const fetchUsers = (longitude, latitude, maxDistance) => async (dispatch)
         };
 
         const { data } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/v1/users-list`, { longitude, latitude, maxDistance }, config);
-        console.log(data)
+        // console.log(data)
 
         dispatch({ type: FETCH_USERS_SUCCESS, payload: data.users });
     } catch (error) {

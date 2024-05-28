@@ -13,7 +13,6 @@ export const getUserLocation = function (req, res) {
 
 export const updateUserLocation = async (req, res) => {
 
-    console.log("reaches here");
     const userId = req.user._id;
     const { longitude, latitude } = req.body;
 
@@ -44,7 +43,6 @@ export const findUsersAround = async function (req, res) {
     const currentUser = req.user;
     const { longitude, latitude, maxDistance } = req.body; // Assuming longitude and latitude are provided in the request body
 
-    console.log("le lode", longitude, latitude, maxDistance)
     try {
         const users = await userModel.find({
             location: {
@@ -58,7 +56,7 @@ export const findUsersAround = async function (req, res) {
             }
         });
 
-        console.log("users loda", users)
+        // console.log("users loda", users)
 
         res.json({ success: true, users });
     } catch (error) {
