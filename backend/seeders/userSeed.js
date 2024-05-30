@@ -11,6 +11,10 @@ const createUser = async (numUsers) => {
                 email: faker.internet.email(),
                 bio: faker.lorem.sentence(10),
                 password: "1234567890",
+                avatar: {
+                    url: faker.image.avatar(),
+                    public_id: faker.system.fileName(),
+                },
 
             })
             usersPromise.push(tempUser)

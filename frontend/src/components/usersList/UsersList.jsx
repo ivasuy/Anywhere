@@ -2,16 +2,15 @@ import React, { useEffect, useState } from 'react';
 import userFace from "../../assets/userFace.jpg";
 import "./usersList.scss";
 import UserDetails from '../UserDetails/UserDetails';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchUsers } from "../../actions/locationAction"
+import { useSelector } from 'react-redux';
 
 const UsersList = () => {
     const [showDetails, setShowDetails] = useState(false);
     const allUsers = useSelector((state) => state.location_users);
 
     useEffect(() => {
-        console.log("lode ka", allUsers.users)
-        console.log()
+
+        console.log("ghode ka", allUsers.users)
     }, [allUsers])
 
     const handleUserClick = () => {

@@ -107,4 +107,6 @@ export const getUserDetails = async function (req, res, next) {
 export const searchUser = TryCatch(async (req, res) => {
     const { name } = req.query;
 
+    // const myChats
+
 })
