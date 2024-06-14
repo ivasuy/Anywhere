@@ -1,7 +1,9 @@
 #loginPage {
   display: flex;
   flex-direction: row;
-  height: 100vh;
+  height: 100vh !important;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
   // width: 60vh;
 
   #mid {
@@ -12,8 +14,7 @@
     flex-direction: column;
 
     h1 {
-      font: 300 2.5vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
-        sans-serif;
+      font: 300 5vmax "Shadows Into Light", cursive;
     }
 
     button {
@@ -26,25 +27,30 @@
       font: 300 1.2vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
         sans-serif;
     }
+
     button:hover {
       background-color: rgb(157, 157, 157);
       border-radius: 10px;
       cursor: pointer;
     }
+
     p {
       text-align: center;
       width: 20vw;
       font: 300 1vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
         sans-serif;
     }
+
     #signupBut {
       background-color: black;
       color: white;
     }
+
     #signupBut:hover {
       background-color: rgb(157, 157, 157);
     }
   }
+
   #right {
     flex: 6;
     // border: 2px solid red;
@@ -61,12 +67,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
     span {
-      font: 200 7vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
-        sans-serif;
+      // font: 200 7vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      //   sans-serif;
+      font: 300 8vmax "Shadows Into Light", cursive;
     }
   }
 }
+
 // #right:hover {
 //   background-image: linear-gradient(to bottom right, red, yellow);
 // }
@@ -74,12 +83,15 @@
   0% {
     background-color: red;
   }
+
   25% {
     background-color: yellow;
   }
+
   50% {
     background-color: rgb(191, 191, 255);
   }
+
   100% {
     background-color: rgb(83, 228, 83);
   }
@@ -93,12 +105,14 @@
     align-items: center;
     margin: 0;
     height: fit-content;
+
     #mid {
       display: flex;
       justify-content: center;
       align-items: center;
       margin-top: 10vh;
     }
+
     #right {
       height: fit-content;
       margin-top: 10vh;

@@ -14,6 +14,7 @@ userRouter.route("/me").get(isAuthenticated, getUserDetails);
 userRouter.route("/search-user").get(isAuthenticated, searchUser);
 
 
+
 //use multer in whichever component files uploading is used
 
 export default userRouter;

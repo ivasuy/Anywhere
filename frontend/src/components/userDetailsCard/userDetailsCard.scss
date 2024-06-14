@@ -1,0 +1,206 @@
+#UserDetailsCard {
+
+    font: 300 2vh "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS";
+    border: 1px solid gray;
+    border-radius: 10px;
+    margin: 10px;
+
+
+    #topUserDetailsCard {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 3vw;
+
+        padding: 10px;
+        // width: auto;
+        margin: 5px;
+
+        #imageAndName {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            img {
+                object-fit: cover;
+                width: 10vw;
+                border-radius: 100%;
+            }
+
+            #composeMessageIcon {
+                all: unset;
+                width: fit-content;
+                padding: 10px;
+                border-radius: 10px;
+            }
+
+            #composeMessageIcon:hover {
+                cursor: pointer;
+                background-color: yellow;
+                color: black;
+
+            }
+        }
+
+        div {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+
+            a {
+                text-decoration: none;
+                color: black;
+            }
+
+            a:hover {
+                cursor: pointer;
+            }
+
+            h1 {
+                font: 400 3vh "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS";
+                color: white;
+            }
+
+            div {
+                background-color: yellow;
+                padding: 18px;
+                margin: 5px;
+                border-radius: 20px;
+                width: 10vw;
+
+                a {
+                    text-decoration: none;
+                    color: black;
+                }
+
+                a:hover {
+                    cursor: pointer;
+                }
+
+            }
+
+        }
+
+    }
+
+    #userBio {
+        text-align: left;
+        height: 10vh;
+        overflow: scroll;
+        padding: 10px;
+        margin: 10px;
+
+    }
+
+    #bottomUserCardDetails {
+        #buttonsbottomUserCardDetails {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+
+            button {
+                height: 6vh;
+                margin: 10px;
+                width: 100%;
+                border: none;
+                border-radius: 10px;
+                font-size: 1.8vh;
+                font: 200 2vh "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS";
+            }
+
+            button:hover {
+                background-color: yellow;
+                cursor: pointer;
+            }
+        }
+
+        #exploreUserButton {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            button {
+                width: 100%;
+                margin: 10px;
+                height: 6vh;
+                border-radius: 10px;
+                border: none;
+                font-size: 1.8vh;
+                font: 200 2vh "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS";
+
+            }
+
+            button:hover {
+                cursor: pointer;
+                background-color: yellow;
+            }
+        }
+    }
+
+}
+
+#UserDetailsCard:hover {
+    background-color: rgba(255, 233, 37, 0.2);
+    cursor: pointer;
+}
+
+
+@media screen and (max-width: 900px) {
+    #UserDetailsCard {
+        // margin-left: 20px;
+        width: 93vw;
+        margin: 0;
+    }
+
+    #topUserDetailsCard {
+        // width: 80vw;
+        display: flex;
+        flex-direction: column !important;
+        justify-content: center;
+        align-items: center;
+        gap: 2px !important;
+
+        #imageAndName {
+            display: flex;
+            flex-direction: row !important;
+            justify-content: space-between !important;
+            align-items: center;
+            gap: 10vw;
+
+            img {
+                width: 25vw;
+            }
+        }
+
+        #credDetails {
+            display: flex;
+            flex-direction: row !important;
+        }
+    }
+
+    #bottomUserCardDetails {
+        #buttonsbottomUserCardDetails {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+
+            button {
+                height: 5vh;
+                margin: 10px;
+                width: 12vw;
+                border: none;
+                border-radius: 10px;
+            }
+
+            button:hover {
+                background-color: red;
+                cursor: pointer;
+            }
+        }
+    }
+}

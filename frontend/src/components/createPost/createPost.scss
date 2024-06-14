@@ -1,0 +1,121 @@
+.create-post-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5); // Semi-transparent background
+}
+
+.create-post-container {
+    position: relative;
+    background-color: rgba(248, 209, 11, 0.927);
+    padding: 20px;
+    border-radius: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 600px;
+    max-width: 90%;
+    text-align: center;
+    z-index: 2;
+
+    h2 {
+        font: 200 4vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+        color: black;
+    }
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.custom-file-button {
+    padding: 10px 20px;
+    background-color: rgb(21, 21, 21);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 20px;
+
+    &:hover {
+        background-color: black;
+        cursor: pointer;
+    }
+}
+
+.preview-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.preview-item {
+    margin: 5px;
+}
+
+.preview-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.caption-input {
+    width: 90%;
+    padding: 10px;
+    height: 15vh;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    resize: none;
+}
+
+.submit-button {
+    padding: 10px 20px;
+    // background-color: black;
+    // color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+        background-color: black;
+        color: white;
+        cursor: pointer;
+    }
+}
+
+#RadioButtons {
+    font: 200 1.5vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+    color: black;
+    margin: 10px;
+
+    label {
+        margin: 10px;
+    }
+}
+
+.accessDisclaimer {
+    background-color: red;
+    padding: 10px;
+    margin: 10px; // Adding some padding for better readability
+    border-radius: 5px; // Adding border-radius to match the rest of the design
+    margin-top: 20px; // Adding margin for spacing
+
+    span {
+        font: 200 1.2vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+        color: white;
+    }
+}

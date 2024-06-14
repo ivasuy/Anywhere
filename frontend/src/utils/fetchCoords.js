@@ -29,7 +29,7 @@ export const fetchCoords = async (options) => {
         const watchId = await new Promise((resolve, reject) => {
             const successCallback = (position) => {
                 const { latitude, longitude } = position.coords;
-                console.log("Coordinates fetched successfully lode", { latitude, longitude });
+                console.log("Coordinates fetched successfully", { latitude, longitude });
                 localStorage.setItem('userCoordinates', JSON.stringify({ latitude, longitude }));
                 resolve(position);
             };

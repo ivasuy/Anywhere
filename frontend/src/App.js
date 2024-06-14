@@ -22,8 +22,6 @@ import { update_user_location } from './actions/locationAction';
 function App() {
 
 
-  // useEffect(() => {
-  // }, [])
 
   const dispatch = useDispatch();
 
@@ -34,24 +32,18 @@ function App() {
       enableHighAccuracy: true,
       timeout: 10000,
     };
-
     fetchCoords(options)
-      .then(cleanup => {
+      .then((cleanup) => {
         // Success - you can store the cleanup function to call it later
         // console.log("bhainse ka ", cleanup())
         cleanup();
       })
-      .catch(error => {
+      .catch((error) => {
         console.log("Error occurred during fetchCoords", error);
       });
-    const data = localStorage.getItem('userCoordinates');
-    const parsedData = JSON.parse(data);
 
-    dispatch(update_user_location(parsedData.longitude, parsedData.latitude));
   }, [])
 
-
-  const { isAuthenticated } = useSelector((state) => state.user)
 
   return (
     <BrowserRouter>

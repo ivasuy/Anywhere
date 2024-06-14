@@ -2,14 +2,14 @@
   animation: example 10s infinite;
   // height: fit-content;
   // width: fit-content;
-  height: 100vh;
+  height: 100vh !important;
   width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
+
   h1 {
-    font: 200 7vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
-      sans-serif;
+    font: 300 8vmax "Shadows Into Light", cursive;
   }
 }
 
@@ -17,12 +17,15 @@
   0% {
     background-color: red;
   }
+
   25% {
     background-color: yellow;
   }
+
   50% {
     background-color: rgb(191, 191, 255);
   }
+
   100% {
     background-color: rgb(83, 228, 83);
   }

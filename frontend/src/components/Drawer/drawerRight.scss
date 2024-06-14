@@ -1,0 +1,49 @@
+#drawerRight {
+    overflow: auto;
+}
+
+#hamburgerIcon {
+    position: absolute;
+    right: 40px;
+    top: 40px;
+    z-index: 3;
+}
+
+#hamburgerIcon:hover {
+    cursor: pointer;
+}
+
+#drawerContent {
+    height: 100%;
+    overflow: auto;
+}
+
+#topNavDrawer {
+    width: 100%;
+    text-align: center;
+
+    h1 {
+        color: white;
+        font: 300 3.5vmax "Shadows Into Light", cursive;
+    }
+}
+
+#bottomRightMyFeedDrawer {
+    display: none;
+}
+
+#suggestedUsers {
+    text-align: center;
+    margin-top: 50px;
+
+    h1 {
+        font: 250 3vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+            sans-serif;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    #bottomRightMyFeedDrawer {
+        display: block;
+    }
+}
