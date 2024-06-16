@@ -63,11 +63,17 @@ const postSchema = new mongoose.Schema({
 
         },
     ],
+    sharedWith: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'UserModel',
+        },
+    ],
     shares: [
         {
             user: {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: 'User',
+                ref: 'UserModel',
             },
             date: {
                 type: Date,
@@ -85,12 +91,6 @@ const postSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
-    sharedWith: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'UserModel',
-        },
-    ],
 });
 
 export const Post = mongoose.model('Post', postSchema);

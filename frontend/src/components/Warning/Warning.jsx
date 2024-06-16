@@ -5,7 +5,7 @@ const Warning = ({ onAgree, onDisagree }) => {
   return (
     <div className="warning-overlay">
       <div className="warning-container">
-        <h1>Warning!</h1>
+        <h1>Disclaimer !</h1>
         <p>
           If you post any NSFW content or anything that might harm others and
           are found guilty, your phone number and all accounts connected to that phone number will be permanently banned and

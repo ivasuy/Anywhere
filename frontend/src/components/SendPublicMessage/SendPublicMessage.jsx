@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import "./createPost.scss";
+import "./sendPublicMessage.scss";
 import { FaTimes, FaShare } from "react-icons/fa";
 import UserList from '.././usersList/UsersList'; // Make sure you import your UserList component
 
-const CreatePost = ({ setCreatePostPermission, accessFlag }) => {
+const CreatePost = ({ setSendPublicMessage, accessFlag }) => {
     const [post, setPost] = useState({
         selectedFiles: [],
         caption: "",
@@ -36,7 +36,7 @@ const CreatePost = ({ setCreatePostPermission, accessFlag }) => {
     };
 
     const onClose = () => {
-        setCreatePostPermission(false);
+        setSendPublicMessage(false);
     };
 
     const handleAccessibilityChange = (event) => {
@@ -135,7 +135,7 @@ const CreatePost = ({ setCreatePostPermission, accessFlag }) => {
                         </button>
                     </>
                 ) : (
-                    <UserList post={post} setShowUserList={setShowUserList} setCreatePostPermission={setCreatePostPermission} />
+                    <UserList post={post} setShowUserList={setShowUserList} setSendPublicMessage={setSendPublicMessage} />
                 )}
             </div>
         </div>

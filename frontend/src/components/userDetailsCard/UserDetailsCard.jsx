@@ -9,9 +9,9 @@ const UserDetailsCard = (self) => {
   const user = useSelector((state) => state.user);
   const { avatar } = user.user;
 
-  useEffect(() => {
-    console.log("User details:", user.user);
-  }, [user]);
+  // useEffect(() => {
+  //   console.log("User details:", user.user);
+  // }, [user]);
 
   return (
     <div id="UserDetailsCard">
@@ -27,13 +27,13 @@ const UserDetailsCard = (self) => {
         </div>
         <div id="credDetails">
           <div>
-            <Link>beheld by {}57 users</Link>
+            <Link>beheld by { }57 users</Link>
           </div>
           <div>
-            <Link>beholds {}101 users</Link>
+            <Link>beholds { }101 users</Link>
           </div>
           <div>
-            <Link>chum with {}400 users</Link>
+            <Link>chum with { }400 users</Link>
           </div>
         </div>
       </div>

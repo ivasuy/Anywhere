@@ -29,6 +29,13 @@
             // color: #000000;
             width: 100%;
             overflow: auto;
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+        }
+
+        .caption::-webkit-scrollbar {
+            display: none;
         }
 
         #options {
@@ -51,10 +58,6 @@
 
             span:hover {
                 cursor: pointer;
-            }
-
-            div {
-                // color: black;
             }
         }
 
@@ -99,8 +102,15 @@
 
         #paraPost {
             overflow: scroll;
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
             height: 40vh;
             text-align: center;
+        }
+
+        #paraPost::-webkit-scrollbar {
+            display: none;
         }
     }
 }

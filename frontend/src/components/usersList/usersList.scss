@@ -1,65 +1,104 @@
 .usersContainer {
   display: flex;
-  background-color: rgb(0, 0, 0, 0.80);
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  h1 {
+    font: 300 2.5vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  }
 
   .usersList {
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     overflow-y: auto;
-    /* Add overflow-y property to enable vertical scrolling */
-    height: 100vh;
-    /* Limit the maximum height of usersList */
-    width: 30vw;
-    border-right: 0.8px solid rgb(157, 157, 157);
     text-align: center;
-    top: 0;
+    width: 100%;
 
-    h1 {
-      font: 300 2.5vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
-        sans-serif;
+
+    .selectAllContainer {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+
+      input {
+        margin-right: 10px;
+      }
+
+      span {
+        font: 300 1.5vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+      }
     }
 
     .userDetails {
       display: flex;
-      // justify-content: space-evenly;
       align-items: center;
       margin: 10px;
       border-bottom: 0.1px dotted rgb(157, 157, 157);
+      height: 10vh;
+      background-color: rgba(4, 4, 4, 0.8);
+      padding: 10px;
+      border-radius: 40px;
+      width: 80%;
+
+      input {
+        margin-right: 10px;
+      }
 
       img {
         object-fit: cover;
         height: 10vh;
-        border-radius: 4px;
-        margin: 10px;
+        border-radius: 50%;
+        margin-right: 20px;
       }
 
       span {
-        margin: 10px;
+        font: 300 1.4vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
       }
     }
 
     .userDetails:hover {
       cursor: pointer;
+      background-color: rgba(4, 4, 4, 0.9);
     }
   }
 
-  // .moreUserDetails {
-  //   background-color: rgb(187, 186, 186);
-  //   width: 50vw;
-  //   position: absolute;
-  //   left: 30vw;
-  // }
 }
 
 #emptyUserList {
-  color: white;
+  color: black;
+  font: 300 1.4vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  width: 25vw;
+}
+
+#okButton {
+  button {
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    width: 100px;
+  }
+
+  button:hover {
+    cursor: pointer;
+    background-color: black;
+    color: white;
+  }
+}
+
+#userCount {
+  span {
+    color: black;
+    font: 300 1vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+    width: 25vw;
+  }
 }
 
 @media screen and (max-width: 800px) {
   .usersContainer {
-    width: 100vw;
-    // border: 2px solid red;
-  }
-
-  .usersList {
-    width: 100vw !important;
+    width: 100%;
   }
 }
