@@ -3,9 +3,11 @@ import { NEW_REQUEST } from "../constants/events.js";
 import { TryCatch } from "../middleware/error.js";
 import { Request } from "../models/requestModel.js"
 import { emitEvent } from "../utils/apifeatures.js"
+import userModel from '../models/userModel.js';
+import { Flag } from '@mui/icons-material';
 
 
-const sendFriendRequest = TryCatch(async (req, res, next) => {
+export const sendChumRequest = TryCatch(async (req, res, next) => {
     const { userId } = req.body;
 
     const request = await Request.findOne({
@@ -21,16 +23,16 @@ const sendFriendRequest = TryCatch(async (req, res, next) => {
         sender: req.user,
         receiver: userId,
     });
-
     emitEvent(req, NEW_REQUEST, [userId]);
 
     return res.status(200).json({
         success: true,
-        message: "Friend Request Sent",
+        message: "Chum Request Sent",
     });
+
 });
 
-const acceptFriendRequest = TryCatch(async (req, res, next) => {
+export const acceptChumRequest = TryCatch(async (req, res, next) => {
     const { requestId, accept } = req.body;
 
     const request = await Request.findById(requestId)
@@ -72,25 +74,41 @@ const acceptFriendRequest = TryCatch(async (req, res, next) => {
     });
 });
 
-const getAllNotifications = TryCatch(async (req, res, next) => {
-    const requests = await Request.find({ receiver: req.user }).populate(
-        "sender",
-        "name avatar"
-    );
+export const beholdUser = async (req, res, next) => {
+    const { userId } = req.body;
 
-    const allRequests = requests.map(({ _id, sender }) => ({
-        _id,
-        sender: {
-            _id: sender._id,
-            name: sender.name,
-            avatar: sender.avatar.url,
-        },
-    }));
+    console.log("userId form backend", userId);
 
-    return res.status(200).json({
+    if (!userId) {
+        return res.status(400).json({
+            success: false,
+            message: 'please provide UserId'
+        })
+    }
+
+    const user = await userModel.findById(userId);
+
+    if (!user) return next(new ErrorHandler("User not found", 400));
+
+    if (!user.beholdList.includes(userId)) {
+        userModel.beholdList.push((userId));
+    }
+
+    else if (user.beholdList.includes(userId)) {
+        return res.status(400).json({
+            success: false,
+            flag: false,
+            message: 'User already in behold list.',
+        });
+    }
+
+    await user.save();
+
+    res.status(200).json({
         success: true,
-        allRequests,
-    });
-})
+        message: "User added to behold list successfully",
+        user
+    })
 
-export { sendFriendRequest, acceptFriendRequest, getAllNotifications };
+
+}

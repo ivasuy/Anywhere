@@ -3,13 +3,12 @@ import "./ChatNearby.scss";
 import Metadata from "../../components/layout/metadata/Metadata";
 
 import { fetchUsers } from "../../actions/locationAction";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import UserCardAndPhotos from "../../components/userCardAndPhotos/UserCardAndPhotos";
 import FloatingNav from "../../components/floatingNav/FloatingNav";
 import Warning from "../../components/Warning/Warning";
 import CreatePost from "../../components/createPost/CreatePost";
 import DistanceSlider from "../../components/DistanceSlider/DistanceSlider";
-import SendPublicMessage from "../../components/SendPublicMessage/SendPublicMessage";
 
 const ChatNearby = () => {
 
@@ -18,6 +17,8 @@ const ChatNearby = () => {
   const [createPostPermission, setCreatePostPermission] = useState(false);
   const [sendPublicMessage, setSendPublicMessage] = useState(false);
   const [createMessageFlag, setCreateMessageFlag] = useState(false);
+
+  const allUsers = useSelector((state) => state.location_users);
 
 
 
@@ -55,14 +56,14 @@ const ChatNearby = () => {
               Create a public post
             </button>
           </div>
-          <div className="distanceActionButtons">
+          {/* <div className="distanceActionButtons">
             <button onClick={() => {
               setWarning(true);
               setCreateMessageFlag(true);
             }}>
               Send a direct Message
             </button>
-          </div>
+          </div> */}
           <div className="distanceActionButtons">
             <button>
               Explore channels around you
@@ -81,21 +82,26 @@ const ChatNearby = () => {
           <CreatePost setCreatePostPermission={setCreatePostPermission} />
         </div>
       )}
-      {!warning && createMessageFlag && (
+      {/* {!warning && createMessageFlag && (
         <div id="createPost">
-          {/* Replace this with your message component */}
-          {/* <p>Message Component Placeholder</p> */}
-          <SendPublicMessage setSendPublicMessage={setSendPublicMessage} />
+          <p>Message Component Placeholder</p>
         </div>
-      )}
+      )} */}
 
-      <div id="userListChatNearby">
+      {/* <div id="userListChatNearby">
         {Array.from({ length: 5 }).map((_, index) => (
           <div key={index} id="nearbyListItem">
             <UserCardAndPhotos />
           </div>
         ))}
-      </div>
+      </div> */}
+      {allUsers && allUsers.users && <div id="userListChatNearby">
+        {allUsers.users.map((user, index) => (
+          <div key={index} id="nearbyListItem">
+            <UserCardAndPhotos self={false} user={user} />
+          </div>
+        ))}
+      </div>}
 
       <div>
         <FloatingNav />

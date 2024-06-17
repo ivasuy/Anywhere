@@ -4,7 +4,14 @@
     #userList {
         height: 70vh;
         overflow: auto;
+        scrollbar-width: none;
+        /* Firefox */
+        -ms-overflow-style: none;
     }
 
-    #suggestedUser {}
+    #userList::-webkit-scrollbar {
+        display: none;
+        /* Chrome, Safari, and Opera */
+    }
+
 }

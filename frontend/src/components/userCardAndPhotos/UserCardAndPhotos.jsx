@@ -1,14 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import userFace from "../../assets/userFace.jpg";
 import UserDetailsCard from "../userDetailsCard/UserDetailsCard";
 import "./userCardAndPhotos.scss";
 
-const UserCardAndPhotos = () => {
+const UserCardAndPhotos = ({ self, user }) => {
+
+  // useEffect(() => {
+  //   console.log("lode ja ", user)
+  // }, [])
+
+
   return (
     <div id="userCardAndPhotos">
       <div id="userCard">
-        <UserDetailsCard />
+        <UserDetailsCard self={self} user={user} />
       </div>
+      {/* <div id="userImages">
+          <img src={userFace} alt="" />
+          <img src={userFace} alt="" />
+
+        </div> */}
       <div id="userImages">
         <img src={userFace} alt="" />
       </div>
@@ -19,6 +30,7 @@ const UserCardAndPhotos = () => {
         <img src={userFace} alt="" />
       </div>
     </div>
+
   );
 };
 

@@ -1,29 +1,44 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
 import "./userDetailsCard.scss";
 import { Link } from "react-router-dom";
 import userFace from "../../assets/userFace.jpg";
 import { BiSolidMessageRoundedAdd } from "react-icons/bi";
+import axios from "axios";
 
-const UserDetailsCard = (self) => {
-  const user = useSelector((state) => state.user);
-  const { avatar } = user.user;
+const UserDetailsCard = ({ self, user }) => {
 
   // useEffect(() => {
-  //   console.log("User details:", user.user);
-  // }, [user]);
+  //   console.log("user from userDetails", user._id)
+  // }, [])
+
+  const handleBeholdUser = async (e) => {
+    e.preventDefault();
+
+    console.log("user To be beholded", user._id);
+
+    const config = {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true
+    };
+
+    const beholdedUser = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/v1/request/behold`, user._id, config);
+
+    console.log("success", beholdedUser);
+  }
+
 
   return (
     <div id="UserDetailsCard">
       <div id="topUserDetailsCard">
         <div id="imageAndName">
-          <img src={avatar || userFace} alt="User Avatar" />
+          <img src={user?.avatar || userFace} alt="User Avatar" />
           <Link>
-            <h1>{user.user.name}</h1>
+            {user && <h1>{user.name}</h1>}
           </Link>
-          <div id="composeMessageIcon">
+          {!self && <div id="composeMessageIcon">
             <BiSolidMessageRoundedAdd size={30} />
           </div>
+          }
         </div>
         <div id="credDetails">
           <div>
@@ -47,19 +62,21 @@ const UserDetailsCard = (self) => {
           repellendus eaque quam. Quo suscipit laborum fuga in!
         </span>
       </div>
-      {self && (
+      {!self && (
         <div id="bottomUserCardDetails">
           <div id="buttonsbottomUserCardDetails">
-            <button>behold</button>
+            <button onClick={handleBeholdUser}>behold</button>
             <button>chum request</button>
-          </div>
-          <div id="exploreUserButton">
-            <button>Explore User</button>
           </div>
         </div>
       )}
+      <div id="exploreUserButton">
+        <button>Explore User</button>
+      </div>
     </div>
   );
 };
 
 export default UserDetailsCard;
+
+

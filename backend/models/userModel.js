@@ -1,51 +1,84 @@
-import mongoose from 'mongoose';
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-import validator from 'validator';
+import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import validator from "validator";
 
+const userSchema = mongoose.Schema(
+    {
+        name: {
+            type: String,
+            required: [true, "Please Enter Your Name"],
+            maxLength: [30, "Name cannot exceed 30 characters"],
+        },
+        email: {
+            type: String,
+            required: [true, "Please Enter Your Email"],
+            unique: true,
+            validate: [validator.isEmail, "Please Enter a valid Email"],
+        },
+        username: {
+            type: String,
+            required: [true, "Please Enter Your Password"],
+            unique: true,
+        },
+        password: {
+            type: String,
+            required: [true, "Please Enter Your Password"],
+            minLength: [8, "Password should be greater than 8 characters"],
+            select: false,
+        },
+        bio: {
+            interests: {
+                type: [String],
+                default: [],
+            },
+            occupation: {
+                type: String,
+                maxLength: [100, "Occupation cannot exceed 100 characters"],
+            },
+            city: {
+                type: String,
+                maxLength: [50, "City name cannot exceed 50 characters"],
+            },
+            state: {
+                type: String,
+                maxLength: [50, "State name cannot exceed 50 characters"],
+            },
+            about: {
+                type: String,
+                maxLength: [500, "Bio cannot exceed 500 characters"],
+            },
+        },
+        gender: {
+            type: String,
+            // required: [true, "Please Enter Your Gender"],
+            enum: ["Male", "Female", "Others"],
+        },
+        dateOfBirth: {
+            type: Date,
+            // required: [true, "Please Enter Your Date Of Birth"],
+        },
+        phoneNumber: {
+            type: Number,
+            // required: [true, "Please Enter Your Phone Number"],
+            // unique: true,
+            // default: 8734599272,
+            maxLength: [10, "Phone Number cannot exceed 10 digits"],
+        },
+        userPosts: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Post",
+            },
+        ],
 
-
-const userSchema = mongoose.Schema({
-    name: {
-        type: String,
-        required: [true, "Please Enter Your Name"],
-        maxLength: [30, "Name cannot exceed 30 characters"],
-    },
-    email: {
-        type: String,
-        required: [true, "Please Enter Your Email"],
-        unique: true,
-        validate: [validator.isEmail, "Please Enter a valid Email"],
-    },
-    username: {
-        type: String,
-        required: [true, "Please Enter Your Password"],
-        unique: true,
-    },
-    password: {
-        type: String,
-        required: [true, "Please Enter Your Password"],
-        minLength: [8, "Password should be greater than 8 characters"],
-        select: false,
-    },
-    gender: {
-        type: String,
-        // required: [true, "Please Enter Your Gender"],
-        enum: ["Male", "Female", "Others"],
-    },
-    dateOfBirth: {
-        type: Date,
-        // required: [true, "Please Enter Your Date Of Birth"],
-    },
-    phoneNumber: {
-        type: Number,
-        // required: [true, "Please Enter Your Phone Number"],
-        // unique: true,
-        // default: 8734599272,
-        maxLength: [10, "Phone Number cannot exceed 10 digits"],
-    },
-    userImages: [
-        {
+        beholdList: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "UserModel",
+            }
+        ],
+        avatar: {
             public_id: {
                 type: String,
                 // required: true,
@@ -55,64 +88,53 @@ const userSchema = mongoose.Schema({
                 // required: true,
             },
         },
-    ],
-    avatar: {
-        public_id: {
+        role: {
             type: String,
-            // required: true,
+            default: "admin",
         },
-        url: {
+
+        userStatus: {
             type: String,
-            // required: true,
+            default: "Active",
+            enum: ["Active", "Inactive", "Suspended", "Blocked"],
         },
-    },
-    role: {
-        type: String,
-        default: "admin",
-    },
-
-    userStatus: {
-        type: String,
-        default: "Active",
-        enum: ["Active", "Inactive", "Suspended", "Blocked"],
-    },
-    location: {
-        type: {
-            type: String,
-            enum: ['Point'], // GeoJSON type
-            default: 'Point',
+        location: {
+            type: {
+                type: String,
+                enum: ["Point"], // GeoJSON type
+                default: "Point",
+            },
+            coordinates: {
+                type: [Number], // Array of [longitude, latitude]
+                index: "2dsphere", // Create 2dsphere index for geospatial queries
+                default: [0, 0],
+            },
         },
-        coordinates: {
-            type: [Number], // Array of [longitude, latitude]
-            index: '2dsphere', // Create 2dsphere index for geospatial queries
-            default: [0, 0]
-        }
+        createdAt: {
+            type: Date,
+            default: Date.now,
+        },
+
+        resetPasswordToken: String,
+        resetPasswordExpire: Date,
     },
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    },
+    {
+        timestamps: true,
+    }
+);
 
-    resetPasswordToken: String,
-    resetPasswordExpire: Date,
-}, {
-    timestamps: true
-})
-
-userSchema.index({ location: '2dsphere' });
-
+userSchema.index({ location: "2dsphere" });
 
 // JWT Token
 userSchema.methods.getJWTToken = function () {
     return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
         // expiresIn: process.env.JWT_EXPIRE,
-
     });
-}
+};
 
 userSchema.methods.comparePassword = async function (password) {
     return await bcrypt.compare(password, this.password);
-}
+};
 
 // Hashing password
 userSchema.pre("save", async function (next) {

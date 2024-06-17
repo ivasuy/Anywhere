@@ -2,7 +2,11 @@
     display: flex;
     flex-direction: row;
     overflow: auto;
-    width: 32vw;
+    width: 30vw;
+    // border: 2px solid red;
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
 
     #userCard {
         width: 100%;
@@ -28,6 +32,11 @@
     }
 
 
+}
+
+#userCardAndPhotosWrapper::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, and Opera */
 }
 
 @media screen and (max-width: 900px) {

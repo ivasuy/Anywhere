@@ -1,5 +1,6 @@
 import { NEW_REQUEST } from "../constants/events.js";
 import { TryCatch } from "../middleware/error.js";
+import { Request } from "../models/requestModel.js";
 import userModel from "../models/userModel.js";
 // import { ErrorHandler } from '../utils/errorHandler.js';
 import { ErrorHandler } from '../utils/errorHandler.js';  // Corrected import statement
@@ -111,3 +112,25 @@ export const searchUser = TryCatch(async (req, res) => {
     // const myChats
 
 })
+
+
+export const getMyNotifications = TryCatch(async (req, res) => {
+    const requests = await Request.find({ receiver: req.user }).populate(
+        "sender",
+        "name avatar"
+    );
+
+    const allRequests = requests.map(({ _id, sender }) => ({
+        _id,
+        sender: {
+            _id: sender._id,
+            name: sender.name,
+            avatar: sender.avatar.url,
+        },
+    }));
+
+    return res.status(200).json({
+        success: true,
+        allRequests,
+    });
+});

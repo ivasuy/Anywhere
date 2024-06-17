@@ -1,5 +1,6 @@
 import { TryCatch } from "../middleware/error.js";
 import { Post } from "../models/postModel.js";
+import userModel from "../models/userModel.js";
 import { ErrorHandler } from "../utils/errorHandler.js";
 import cloudinary from "cloudinary";
 
@@ -48,6 +49,12 @@ const createNewPost = TryCatch(async (req, res, next) => {
         mediaFiles: mediaFilesLink,
         accessibility
     });
+
+    // Update the user's post list
+    await userModel.findByIdAndUpdate(req.user._id, {
+        $push: { userPosts: newPost._id }
+    });
+
 
     console.log("post Created successfully", newPost)
 

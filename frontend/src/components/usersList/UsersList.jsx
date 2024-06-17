@@ -12,7 +12,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { NEW_POST_RESET } from '../../constants/postConstants';
 
 
-const UsersList = ({ post, setShowUserList, setCreatePostPermission, setSendPublicMessage }) => {
+const UsersList = ({ post, setShowUserList, setCreatePostPermission }) => {
     const alert = useAlert();
 
     const navigate = useNavigate();
