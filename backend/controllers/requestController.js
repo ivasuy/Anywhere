@@ -3,8 +3,7 @@ import { NEW_REQUEST } from "../constants/events.js";
 import { TryCatch } from "../middleware/error.js";
 import { Request } from "../models/requestModel.js"
 import { emitEvent } from "../utils/apifeatures.js"
-import userModel from '../models/userModel.js';
-import { Flag } from '@mui/icons-material';
+import userModel from "../models/userModel.js";
 
 
 export const sendChumRequest = TryCatch(async (req, res, next) => {
@@ -74,41 +73,54 @@ export const acceptChumRequest = TryCatch(async (req, res, next) => {
     });
 });
 
-export const beholdUser = async (req, res, next) => {
+export const beholdUser = TryCatch(async (req, res, next) => {
     const { userId } = req.body;
 
-    console.log("userId form backend", userId);
+    console.log("userId from backend", userId);
 
     if (!userId) {
-        return res.status(400).json({
-            success: false,
-            message: 'please provide UserId'
-        })
+        return next(new ErrorHandler("Please provide userId of user to behold", 500));
+
     }
 
-    const user = await userModel.findById(userId);
+    const currentUser = await userModel.findById(req.user._id); // Authenticated user
+    const targetUser = await userModel.findById(userId); // User to be added to behold list
 
-    if (!user) return next(new ErrorHandler("User not found", 400));
-
-    if (!user.beholdList.includes(userId)) {
-        userModel.beholdList.push((userId));
+    if (!targetUser) {
+        return next(new ErrorHandler("User not found", 404));
     }
 
-    else if (user.beholdList.includes(userId)) {
-        return res.status(400).json({
-            success: false,
-            flag: false,
-            message: 'User already in behold list.',
-        });
+    if (!currentUser.beholdList.includes(userId)) {
+        currentUser.beholdList.push(userId);
+    } else {
+        console.log("bahen k lode")
+        return next(new ErrorHandler("User alredy present in behold list", 400));
+
+
     }
 
-    await user.save();
+    await currentUser.save();
 
     res.status(200).json({
         success: true,
         message: "User added to behold list successfully",
-        user
-    })
+        user: currentUser
+    });
+})
 
 
-}
+export const fetchCount = TryCatch(async (req, res, next) => {
+
+    console.log("reacheere here")
+    const currentUserId = req.user._id;
+
+    const count = await userModel.countDocuments({
+        beholdList: currentUserId
+    });
+
+    res.status(200).json({
+        success: true,
+        count,
+        message: `Total users who have beheld the current user: ${count}`
+    });
+})

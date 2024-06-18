@@ -6,26 +6,33 @@ import Post from "../../components/post/Post";
 import userFace from "../../assets/userFace.jpg";
 import DrawerRight from "../../components/Drawer/DrawerRight";
 import TopNav from "../../components/topNav/TopNav";
-import UserDetailsCard from "../../components/userDetailsCard/UserDetailsCard";
-import { fetchCoords } from "../../utils/fetchCoords";
 import { useDispatch, useSelector } from "react-redux";
 import { update_user_location } from "../../actions/locationAction";
 import UserCardAndPhotos from "../../components/userCardAndPhotos/UserCardAndPhotos";
 import SuggestedUsers from "../../components/suggestedUsers/SuggestedUsers";
+import axios from "axios";
 
 const MyFeed = () => {
   const dispatch = useDispatch();
 
   const { user } = useSelector((state) => state.user);
 
+  const countUserCred = async () => {
+    const { data } = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/v1/request/all-count`, { withCredentials: true });
+
+    console.log("lode kja ", data.count);
+  }
+
   useEffect(() => {
     const data = localStorage.getItem("userCoordinates");
     const parsedData = JSON.parse(data);
 
-    console.log("this is correct")
-    console.log(user);
-
     dispatch(update_user_location(parsedData.longitude, parsedData.latitude));
+
+    console.log("tri maa ka mahair bawala")
+    countUserCred();
+
+
   }, []);
 
   const postData = {
@@ -74,7 +81,7 @@ const MyFeed = () => {
         </div>
         <div id="bottomRightMyFeed">
           {/* <UserDetailsCard /> */}
-          <UserCardAndPhotos self={true} user={user} />
+          {user && <UserCardAndPhotos self={true} user={user} />}
           <div id="suggestedUsers">
             <h1>Suggested Users</h1>
             <div id="userList">

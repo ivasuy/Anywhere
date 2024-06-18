@@ -5,21 +5,12 @@ import "./userCardAndPhotos.scss";
 
 const UserCardAndPhotos = ({ self, user }) => {
 
-  // useEffect(() => {
-  //   console.log("lode ja ", user)
-  // }, [])
-
 
   return (
     <div id="userCardAndPhotos">
       <div id="userCard">
         <UserDetailsCard self={self} user={user} />
       </div>
-      {/* <div id="userImages">
-          <img src={userFace} alt="" />
-          <img src={userFace} alt="" />
-
-        </div> */}
       <div id="userImages">
         <img src={userFace} alt="" />
       </div>

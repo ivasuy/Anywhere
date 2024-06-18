@@ -7,10 +7,6 @@ import axios from "axios";
 
 const UserDetailsCard = ({ self, user }) => {
 
-  // useEffect(() => {
-  //   console.log("user from userDetails", user._id)
-  // }, [])
-
   const handleBeholdUser = async (e) => {
     e.preventDefault();
 
@@ -21,9 +17,13 @@ const UserDetailsCard = ({ self, user }) => {
       withCredentials: true
     };
 
-    const beholdedUser = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/v1/request/behold`, user._id, config);
+    const { data } = await axios.put(
+      `${process.env.REACT_APP_BACKEND_URL}/api/v1/request/behold`,
+      { userId: user._id }, // Pass the user ID in the request body
+      config
+    );
 
-    console.log("success", beholdedUser);
+    console.log("success", data.message);
   }
 
 
