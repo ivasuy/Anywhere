@@ -29,7 +29,7 @@ const schema = new Schema(
         },
     },
     {
-        // timestamps: true,
+        timestamps: true,
     }
 );
 

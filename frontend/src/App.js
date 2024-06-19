@@ -16,6 +16,7 @@ import ProtectRoute from "./components/auth/ProtectRoute";
 import NotFound from "./pages/notFound/NotFound";
 import ChatNearby from "./pages/ChatNearby/ChatNearby";
 import { fetchCoords } from './utils/fetchCoords';
+import Message from "./pages/Message/Message";
 
 
 function App() {
@@ -60,6 +61,7 @@ function App() {
         <Route path="/myself" element={<Myself />} />
 
         <Route path="/chat-nearby" element={<ChatNearby />} />
+        <Route path="/message/:id" element={<Message />} />
 
 
 

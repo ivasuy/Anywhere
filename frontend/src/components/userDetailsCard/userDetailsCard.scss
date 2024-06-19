@@ -34,12 +34,16 @@
                 width: fit-content;
                 padding: 10px;
                 border-radius: 10px;
+
+                a {
+                    font-style: none;
+                    text-decoration: none;
+                }
             }
 
             #composeMessageIcon:hover {
                 cursor: pointer;
-                background-color: yellow;
-                color: black;
+                background-color: rgb(18, 18, 18, 0.7);
 
             }
         }

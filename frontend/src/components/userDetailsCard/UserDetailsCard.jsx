@@ -124,9 +124,16 @@ const UserDetailsCard = ({ self, user }) => {
           <Link>
             {user && <h1>{user.name}</h1>}
           </Link>
-          {!self && (
+          {/* {!self && (
             <div id="composeMessageIcon">
               <BiSolidMessageRoundedAdd size={30} />
+            </div>
+          )} */}
+          {!self && (
+            <div id="composeMessageIcon">
+              {user && <Link to={`/message/${user._id}`}>
+                <BiSolidMessageRoundedAdd size={30} style={{ color: "white" }} />
+              </Link>}
             </div>
           )}
         </div>

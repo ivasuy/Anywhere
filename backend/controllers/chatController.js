@@ -7,6 +7,48 @@ import { getOtherMember } from "../lib/helper.js";
 import userModel from "../models/userModel.js";
 import { Message } from "../models/messageModel.js";
 
+
+export const newSingleChat = TryCatch(async (req, res, next) => {
+    const { userId } = req.body;
+    const loggedInUserId = req.user._id; // Assuming you have the logged-in user's ID in req.user
+
+    if (!userId || !loggedInUserId) {
+        return res.status(400).json({ success: false, message: "User ID is required" });
+    }
+
+    try {
+        // Check if the user exists
+        const user = await userModel.findById(userId);
+        if (!user) {
+            return res.status(404).json({ success: false, message: "User not found" });
+        }
+
+        // Check if a chat already exists with the same members (optional)
+        let existingChat = await Chat.findOne({
+            members: { $all: [loggedInUserId, userId], $size: 2 },
+            groupChat: false
+        });
+
+        if (existingChat) {
+            return res.status(400).json({ success: false, message: "Chat already exists" });
+        }
+
+        // Create a new chat
+        const newChat = new Chat({
+            creator: loggedInUserId,
+            members: [loggedInUserId, userId],
+            groupChat: false
+        });
+
+        await newChat.save();
+
+        res.status(201).json({ success: true, message: "Chat created successfully", chat: newChat });
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Internal server error", error: error.message });
+    }
+});
+
+
 const newGroupChat = TryCatch(async (req, res, next) => {
     const { name, members } = req.body;
 
