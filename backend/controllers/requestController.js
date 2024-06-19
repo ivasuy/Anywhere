@@ -31,6 +31,7 @@ export const sendChumRequest = TryCatch(async (req, res, next) => {
 
 });
 
+
 export const acceptChumRequest = TryCatch(async (req, res, next) => {
     const { requestId, accept } = req.body;
 
@@ -41,42 +42,54 @@ export const acceptChumRequest = TryCatch(async (req, res, next) => {
     if (!request) return next(new ErrorHandler("Request not found", 404));
 
     if (request.receiver._id.toString() !== req.user._id.toString())
-        return next(
-            new ErrorHandler("You are not authorized to accept this request", 401)
-        );
+        return next(new ErrorHandler("You are not authorized to accept this request", 401));
 
     if (!accept) {
         await request.deleteOne();
-
         return res.status(200).json({
             success: true,
             message: "Friend Request Rejected",
         });
     }
 
-    const members = [request.sender._id, request.receiver._id];
+    const session = await mongoose.startSession();
+    session.startTransaction();
 
-    await Promise.all([
-        Chat.create({
-            members,
-            name: `${request.sender.name}-${request.receiver.name}`,
-        }),
-        request.deleteOne(),
-    ]);
+    try {
+        const senderId = request.sender._id;
+        const receiverId = request.receiver._id;
 
-    emitEvent(req, REFETCH_CHATS, members);
+        // Add each user to the other's chumList
+        await userModel.findByIdAndUpdate(senderId, { $addToSet: { chumList: receiverId } }, { session });
+        await userModel.findByIdAndUpdate(receiverId, { $addToSet: { chumList: senderId } }, { session });
 
-    return res.status(200).json({
-        success: true,
-        message: "Friend Request Accepted",
-        senderId: request.sender._id,
-    });
+        // Optionally create a chat and delete the request within the transaction
+        // await Chat.create([{ members: [senderId, receiverId], name: `${request.sender.name}-${request.receiver.name}` }], { session });
+        await request.deleteOne({ session });
+
+        await session.commitTransaction();
+        session.endSession();
+
+        // Emit an event if needed
+        emitEvent(req, REFETCH_CHATS, [senderId, receiverId]);
+
+        return res.status(200).json({
+            success: true,
+            message: "Friend Request Accepted",
+            senderId: senderId,
+        });
+    } catch (error) {
+        await session.abortTransaction();
+        session.endSession();
+        return next(new ErrorHandler("Failed to accept friend request", 500));
+    }
 });
+
 
 export const beholdUser = TryCatch(async (req, res, next) => {
     const { userId } = req.body;
 
-    console.log("userId from backend", userId);
+    // console.log("userId from backend", userId);
 
     if (!userId) {
         return next(new ErrorHandler("Please provide userId of user to behold", 500));
@@ -93,7 +106,6 @@ export const beholdUser = TryCatch(async (req, res, next) => {
     if (!currentUser.beholdList.includes(userId)) {
         currentUser.beholdList.push(userId);
     } else {
-        console.log("bahen k lode")
         return next(new ErrorHandler("User alredy present in behold list", 400));
 
 
@@ -108,19 +120,74 @@ export const beholdUser = TryCatch(async (req, res, next) => {
     });
 })
 
+export const removeBeholdUser = TryCatch(async (req, res, next) => {
+    const { userId } = req.body;
+    const loggedInUserId = req.user._id; // Assuming you have the logged-in user's ID in req.user
 
-export const fetchCount = TryCatch(async (req, res, next) => {
+    // Find the logged-in user
+    const loggedInUser = await userModel.findById(loggedInUserId);
 
-    console.log("reacheere here")
-    const currentUserId = req.user._id;
+    if (!loggedInUser) {
+        return res.status(404).json({ success: false, message: "Logged-in User not found" });
+    }
 
-    const count = await userModel.countDocuments({
-        beholdList: currentUserId
-    });
+    // Remove the specified user from the beholdList
+    const index = loggedInUser.beholdList.indexOf(userId);
+    if (index > -1) {
+        loggedInUser.beholdList.splice(index, 1);
+    } else {
+        return res.status(404).json({ success: false, message: "User to be removed not found in behold list" });
+    }
+
+    // Save the updated user document
+    await loggedInUser.save();
 
     res.status(200).json({
         success: true,
-        count,
-        message: `Total users who have beheld the current user: ${count}`
+        message: "User removed from behold list successfully"
     });
-})
+});
+
+
+export const checkBeholdUser = TryCatch(async (req, res, next) => {
+    const { userId } = req.body;
+    const loggedInUserId = req.user._id; // Assuming you have user id available in req.user
+
+
+    const loggedInUser = await userModel.findById(loggedInUserId).populate('beholdList');
+
+    if (!loggedInUser) {
+        return res.status(404).json({ success: false, message: "Logged-in User not found" });
+    }
+
+    const isUserInBeholdList = loggedInUser.beholdList.find(beholdUser => beholdUser._id.toString() === userId) !== undefined;
+
+    res.status(200).json({
+        success: true, isInBeholdList: isUserInBeholdList
+    });
+});
+
+
+export const fetchCount = TryCatch(async (req, res, next) => {
+
+    const currentUserId = req.body.userId;
+
+    // Count documents where the logged-in user is in other users' beholdList
+    const countBeheldByOthers = await userModel.countDocuments({
+        beholdList: currentUserId,
+    });
+
+    // Find the logged-in user's beholdList
+    const loggedInUser = await userModel.findById(currentUserId).select("beholdList");
+    const countBeholdListUsers = loggedInUser ? loggedInUser.beholdList.length : 0;
+
+
+    res.status(200).json({
+        success: true,
+        count: {
+            countBeheldByOthers,
+            countBeholdListUsers,
+        },
+        // message: `Total users who have beheld the current user: ${countBeheldByOthers}, Total users beheld by the current user: ${countBeheldByLoggedInUser}`,
+    });
+});

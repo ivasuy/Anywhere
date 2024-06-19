@@ -20,6 +20,51 @@ const UserCardAndPhotos = ({ self, user }) => {
       <div id="userImages">
         <img src={userFace} alt="" />
       </div>
+      <div id="userImages">
+        <img src={userFace} alt="" />
+      </div>
+      <div id="userImages">
+        <img src={userFace} alt="" />
+      </div>
+      <div id="userImages">
+        <img src={userFace} alt="" />
+      </div>
+      <div id="userImages">
+        <img src={userFace} alt="" />
+      </div>
+      <div id="userImages">
+        <img src={userFace} alt="" />
+      </div>
+      <div id="userImages">
+        <img src={userFace} alt="" />
+      </div>
+      <div id="userImages">
+        <img src={userFace} alt="" />
+      </div>
+      <div id="userImages">
+        <img src={userFace} alt="" />
+      </div>
+      <div id="userImages">
+        <img src={userFace} alt="" />
+      </div>
+      <div id="userImages">
+        <img src={userFace} alt="" />
+      </div>
+      <div id="userImages">
+        <img src={userFace} alt="" />
+      </div>
+      <div id="userImages">
+        <img src={userFace} alt="" />
+      </div>
+      <div id="userImages">
+        <img src={userFace} alt="" />
+      </div>
+      <div id="userImages">
+        <img src={userFace} alt="" />
+      </div>
+      <div id="userImages">
+        <img src={userFace} alt="" />
+      </div>
     </div>
 
   );

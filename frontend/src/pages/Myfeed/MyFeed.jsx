@@ -17,21 +17,12 @@ const MyFeed = () => {
 
   const { user } = useSelector((state) => state.user);
 
-  const countUserCred = async () => {
-    const { data } = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/v1/request/all-count`, { withCredentials: true });
-
-    console.log("lode kja ", data.count);
-  }
 
   useEffect(() => {
     const data = localStorage.getItem("userCoordinates");
     const parsedData = JSON.parse(data);
 
     dispatch(update_user_location(parsedData.longitude, parsedData.latitude));
-
-    console.log("tri maa ka mahair bawala")
-    countUserCred();
-
 
   }, []);
 

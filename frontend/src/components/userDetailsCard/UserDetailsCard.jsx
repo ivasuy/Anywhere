@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./userDetailsCard.scss";
 import { Link } from "react-router-dom";
 import userFace from "../../assets/userFace.jpg";
@@ -6,26 +6,115 @@ import { BiSolidMessageRoundedAdd } from "react-icons/bi";
 import axios from "axios";
 
 const UserDetailsCard = ({ self, user }) => {
+  const [count, setCount] = useState({});
+  const [checkBehold, setcheckBehold] = useState(false);
+
+  const fetchCount = async (user) => {
+    try {
+      const config = {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      };
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/api/v1/request/all-count`,
+        { userId: user._id },
+        config
+      );
+      setCount(data.count);
+      // console.log(user);
+    } catch (error) {
+      console.log("error", error.response?.data?.message || error.message);
+    }
+  };
 
   const handleBeholdUser = async (e) => {
     e.preventDefault();
+    try {
+      const config = {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      };
+      const { data } = await axios.put(
+        `${process.env.REACT_APP_BACKEND_URL}/api/v1/request/behold`,
+        { userId: user._id },
+        config
+      );
+      console.log("success", data.message);
+      setcheckBehold(true); // Update the state directly
 
-    console.log("user To be beholded", user._id);
+      fetchCount(user); // Update the count after a successful "behold" request
+    } catch (error) {
+      console.log("error", error.response?.data?.message || error.message);
+    }
+  };
 
-    const config = {
-      headers: { "Content-Type": "application/json" },
-      withCredentials: true
-    };
-
-    const { data } = await axios.put(
-      `${process.env.REACT_APP_BACKEND_URL}/api/v1/request/behold`,
-      { userId: user._id }, // Pass the user ID in the request body
-      config
-    );
-
-    console.log("success", data.message);
+  const checkBeholdUser = async (user) => {
+    try {
+      const config = {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      };
+      const { data } = await axios.put(
+        `${process.env.REACT_APP_BACKEND_URL}/api/v1/request/check-behold`,
+        { userId: user._id },
+        config
+      );
+      console.log("success", data.isInBeholdList);
+      setcheckBehold(data.isInBeholdList);
+      fetchCount(user); // Update the count after a successful "behold" request
+    } catch (error) {
+      console.log("error", error.response?.data?.message || error.message);
+    }
   }
 
+  const handleUndoBehold = async (e) => {
+    e.preventDefault();
+    try {
+      const config = {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      };
+      const { data } = await axios.put(
+        `${process.env.REACT_APP_BACKEND_URL}/api/v1/request/remove-behold`,
+        { userId: user._id },
+        config
+      );
+      console.log("success", data.message);
+      setcheckBehold(false);
+
+      fetchCount(user); // Update the count after a successful "behold" request
+    } catch (error) {
+      console.log("error", error.response?.data?.message || error.message);
+    }
+
+  }
+
+
+  const handleChumRequest = async (e) => {
+    e.preventDefault();
+    try {
+      const config = {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      };
+      const { data } = await axios.put(
+        `${process.env.REACT_APP_BACKEND_URL}/api/v1/request/send-chum-request`,
+        { userId: user._id },
+        config
+      );
+      console.log("success", data.message);
+      fetchCount(user); // Update the count after a successful "chum" request
+    } catch (error) {
+      console.log("error", error.response?.data?.message || error.message);
+    }
+  }
+
+  useEffect(() => {
+    if (user) {
+      fetchCount(user);
+      checkBeholdUser(user);
+    }
+  }, [user, checkBehold]);
 
   return (
     <div id="UserDetailsCard">
@@ -35,20 +124,21 @@ const UserDetailsCard = ({ self, user }) => {
           <Link>
             {user && <h1>{user.name}</h1>}
           </Link>
-          {!self && <div id="composeMessageIcon">
-            <BiSolidMessageRoundedAdd size={30} />
-          </div>
-          }
+          {!self && (
+            <div id="composeMessageIcon">
+              <BiSolidMessageRoundedAdd size={30} />
+            </div>
+          )}
         </div>
         <div id="credDetails">
           <div>
-            <Link>beheld by { }57 users</Link>
+            <Link>beheld by {count.countBeheldByOthers || 0} users</Link>
           </div>
           <div>
-            <Link>beholds { }101 users</Link>
+            <Link>beholds {count.countBeholdListUsers || 0} users</Link>
           </div>
           <div>
-            <Link>chum with { }400 users</Link>
+            <Link>chum with {count.chumCount || 0} users</Link>
           </div>
         </div>
       </div>
@@ -65,8 +155,8 @@ const UserDetailsCard = ({ self, user }) => {
       {!self && (
         <div id="bottomUserCardDetails">
           <div id="buttonsbottomUserCardDetails">
-            <button onClick={handleBeholdUser}>behold</button>
-            <button>chum request</button>
+            {!checkBehold ? <button onClick={handleBeholdUser}>behold</button> : <button onClick={handleUndoBehold} id="undoBeholdButton">Undo behold</button>}
+            <button onClick={handleChumRequest}>chum request</button>
           </div>
         </div>
       )}
@@ -78,5 +168,3 @@ const UserDetailsCard = ({ self, user }) => {
 };
 
 export default UserDetailsCard;
-
-

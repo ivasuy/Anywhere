@@ -30,7 +30,7 @@ export const update_user_location = (longitude, latitude) => async (dispatch) =>
         };
 
         const { data } = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/v1/user-location`, { longitude, latitude }, config);
-        console.log(data)
+        console.log("location updated successfully", data)
 
         dispatch({ type: LOCATE_USER_SUCCESS, payload: data.user });
     } catch (error) {

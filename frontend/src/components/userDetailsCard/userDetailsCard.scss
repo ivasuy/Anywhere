@@ -123,6 +123,15 @@
                 border: 0.1px solid yellow;
             }
 
+            #undoBeholdButton {
+                border: 1px solid red;
+
+            }
+
+            #undoBeholdButton:hover {
+                background-color: red;
+            }
+
             button:hover {
                 background-color: yellow;
                 cursor: pointer;
@@ -166,8 +175,12 @@
 @media screen and (max-width: 900px) {
     #UserDetailsCard {
         // margin-left: 20px;
-        width: 93vw;
-        margin: 0;
+        // width: 93vw;
+        width: 90%;
+        // border: 2px solid green;
+        margin-right: 100px;
+        margin-left: 0;
+        // padding: 0;
     }
 
     #topUserDetailsCard {

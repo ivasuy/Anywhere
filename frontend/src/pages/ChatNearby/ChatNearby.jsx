@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ChatNearby.scss";
 import Metadata from "../../components/layout/metadata/Metadata";
 
@@ -9,8 +9,12 @@ import FloatingNav from "../../components/floatingNav/FloatingNav";
 import Warning from "../../components/Warning/Warning";
 import CreatePost from "../../components/createPost/CreatePost";
 import DistanceSlider from "../../components/DistanceSlider/DistanceSlider";
+import { update_user_location } from '../../actions/locationAction';
+
 
 const ChatNearby = () => {
+
+  const dispatch = useDispatch();
 
 
   const [warning, setWarning] = useState(false);
@@ -39,6 +43,14 @@ const ChatNearby = () => {
     setCreatePostPermission(false);
     setCreateMessageFlag(false);
   };
+
+  useEffect(() => {
+    const data = localStorage.getItem("userCoordinates");
+    const parsedData = JSON.parse(data);
+    dispatch(update_user_location(parsedData.longitude, parsedData.latitude))
+  }, [])
+
+
 
   return (
     <div className="chat-nearby-container">

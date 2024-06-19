@@ -10,7 +10,7 @@ const store = configureStore({
         location_users: locationReducer,
         user_location: userLocationReducer,
         new_post: newPostReducer,
-        new_request: newRequestReducer
+        new_request: newRequestReducer,
     },
 })
 

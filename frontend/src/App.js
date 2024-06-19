@@ -16,7 +16,6 @@ import ProtectRoute from "./components/auth/ProtectRoute";
 import NotFound from "./pages/notFound/NotFound";
 import ChatNearby from "./pages/ChatNearby/ChatNearby";
 import { fetchCoords } from './utils/fetchCoords';
-import { update_user_location } from './actions/locationAction';
 
 
 function App() {

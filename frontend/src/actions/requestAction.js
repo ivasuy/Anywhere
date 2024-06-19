@@ -12,7 +12,7 @@ export const createNewChumRequest = (userId) => async (dispatch) => {
             withCredentials: true
         };
 
-        const { data } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/v1/post/new-post`, postData, config);
+        const { data } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/v1/post/new-post`, userId, config);
 
         dispatch({
             type: NEW_CHUM_REQUEST_SUCCESS,

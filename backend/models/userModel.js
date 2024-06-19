@@ -78,6 +78,12 @@ const userSchema = mongoose.Schema(
                 ref: "UserModel",
             }
         ],
+        chumList: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "UserModel",
+            }
+        ],
         avatar: {
             public_id: {
                 type: String,

@@ -8,13 +8,18 @@ import "./drawerRight.scss";
 import UserDetailsCard from "../userDetailsCard/UserDetailsCard";
 import UserCardAndPhotos from "../userCardAndPhotos/UserCardAndPhotos";
 import SuggestedUsers from "../suggestedUsers/SuggestedUsers";
+import { useDispatch, useSelector } from "react-redux";
 
 const DrawerRight = () => {
+
+  const dispatch = useDispatch();
+
+  const { user } = useSelector((state) => state.user);
+
   const [isOpen, setIsOpen] = React.useState(false);
   const toggleDrawer = () => {
     setIsOpen((prevState) => !prevState);
   };
-
   return (
     <div id="drawerRight">
       <div id="hamburgerIcon">
@@ -41,7 +46,7 @@ const DrawerRight = () => {
 
           <div id="bottomRightMyFeedDrawer">
             {/* <UserDetailsCard /> */}
-            <UserCardAndPhotos />
+            {user && <UserCardAndPhotos self={true} user={user} />}
             <hr />
             <div id="suggestedUsers">
               <h1>Suggested Users</h1>
