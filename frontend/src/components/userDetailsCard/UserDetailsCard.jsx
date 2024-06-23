@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import "./userDetailsCard.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import userFace from "../../assets/userFace.jpg";
 import { BiSolidMessageRoundedAdd } from "react-icons/bi";
 import axios from "axios";
 
 const UserDetailsCard = ({ self, user }) => {
+
+  const navigate = useNavigate();
+
   const [count, setCount] = useState({});
   const [checkBehold, setcheckBehold] = useState(false);
+  // const [newChat, setNewChat] = useState({});
+
 
   const fetchCount = async (user) => {
     try {
@@ -39,7 +44,7 @@ const UserDetailsCard = ({ self, user }) => {
         { userId: user._id },
         config
       );
-      console.log("success", data.message);
+      // console.log("success", data.message);
       setcheckBehold(true); // Update the state directly
 
       fetchCount(user); // Update the count after a successful "behold" request
@@ -59,7 +64,7 @@ const UserDetailsCard = ({ self, user }) => {
         { userId: user._id },
         config
       );
-      console.log("success", data.isInBeholdList);
+      // console.log("success", data.isInBeholdList);
       setcheckBehold(data.isInBeholdList);
       fetchCount(user); // Update the count after a successful "behold" request
     } catch (error) {
@@ -79,7 +84,7 @@ const UserDetailsCard = ({ self, user }) => {
         { userId: user._id },
         config
       );
-      console.log("success", data.message);
+      // console.log("success", data.message);
       setcheckBehold(false);
 
       fetchCount(user); // Update the count after a successful "behold" request
@@ -102,10 +107,35 @@ const UserDetailsCard = ({ self, user }) => {
         { userId: user._id },
         config
       );
-      console.log("success", data.message);
+      // console.log("success", data.message);
       fetchCount(user); // Update the count after a successful "chum" request
     } catch (error) {
       console.log("error", error.response?.data?.message || error.message);
+    }
+  }
+
+  const handleCreateChat = async (e) => {
+    e.preventDefault();
+    try {
+      const config = {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      };
+      const { data } = await axios.put(
+        `${process.env.REACT_APP_BACKEND_URL}/api/v1/chat/new-single-chat`,
+        { userId: user._id },
+        config
+      );
+
+      // console.log(data.chat);
+      // if (data.chat) {
+      //   localStorage.setItem('reloadOnChatCreate', 'true');
+
+      // }
+
+    } catch (error) {
+      console.log("error", error.response?.data?.message || error.message);
+
     }
   }
 
@@ -124,16 +154,12 @@ const UserDetailsCard = ({ self, user }) => {
           <Link>
             {user && <h1>{user.name}</h1>}
           </Link>
-          {/* {!self && (
-            <div id="composeMessageIcon">
-              <BiSolidMessageRoundedAdd size={30} />
-            </div>
-          )} */}
           {!self && (
-            <div id="composeMessageIcon">
-              {user && <Link to={`/message/${user._id}`}>
+            <div id="composeMessageIcon" onClick={handleCreateChat}>
+              {user && <Link to={`/home/chat`}>
                 <BiSolidMessageRoundedAdd size={30} style={{ color: "white" }} />
               </Link>}
+
             </div>
           )}
         </div>

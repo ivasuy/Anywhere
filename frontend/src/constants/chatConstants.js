@@ -1,0 +1,5 @@
+export const ALL_CHAT_REQUEST = "ALL_CHAT_REQUEST";
+export const ALL_CHAT_SUCCESS = "ALL_CHAT_SUCCESS";
+export const ALL_CHAT_RESET = "ALL_CHAT_RESET";
+export const ALL_CHAT_FAIL = "ALL_CHAT_FAIL";
+export const CLEAR_ERRORS = "CLEAR_ERRORS";

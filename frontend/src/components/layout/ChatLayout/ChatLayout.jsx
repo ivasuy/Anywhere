@@ -1,8 +1,8 @@
 import React from 'react'
-import Header from './Header/Header'
-import Title from '../shared/Title/Title'
+import Header from '../Header/Header'
+import Title from '..//Title/Title'
 
-const AppLayout = () => WrappedComponent => {
+const ChatLayout = () => (WrappedComponent) => {
     return (props) => {
 
         return (
@@ -16,4 +16,4 @@ const AppLayout = () => WrappedComponent => {
     }
 }
 
-export default AppLayout
+export default ChatLayout

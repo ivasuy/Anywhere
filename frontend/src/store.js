@@ -3,6 +3,7 @@ import { userReducer } from "./reducers/userReducer";
 import { locationReducer, userLocationReducer } from "./reducers/locationReducer";
 import { newPostReducer } from "./reducers/postReducer";
 import { newRequestReducer } from "./reducers/requestReducer";
+import { allChatReducer } from "./reducers/chatReducer";
 
 const store = configureStore({
     reducer: {
@@ -11,6 +12,7 @@ const store = configureStore({
         user_location: userLocationReducer,
         new_post: newPostReducer,
         new_request: newRequestReducer,
+        all_chats: allChatReducer,
     },
 })
 

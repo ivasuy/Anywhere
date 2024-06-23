@@ -16,7 +16,8 @@ import ProtectRoute from "./components/auth/ProtectRoute";
 import NotFound from "./pages/notFound/NotFound";
 import ChatNearby from "./pages/ChatNearby/ChatNearby";
 import { fetchCoords } from './utils/fetchCoords';
-import Message from "./pages/Message/Message";
+import Message from "./components/chatHome/Message/Message";
+import ChatHome from "./pages/ChatHome/ChatHome";
 
 
 function App() {
@@ -24,6 +25,9 @@ function App() {
 
 
   const dispatch = useDispatch();
+
+  const { loading, isAuthenticated, user } = useSelector((state) => state.user);
+  // const navigate = useNavigate();
 
   useEffect(() => {
     store.dispatch(loadUser());
@@ -55,6 +59,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
+        {/* <Route element={
+          <ProtectRoute isAuthenticated={isAuthenticated} />
+        }> */}
         <Route path="/my-feed" element={<MyFeed />} />
         <Route path="/explore-nearby" element={<ExploreNearby />} />
         <Route path="/explore-world" element={<ExploreWorld />} />
@@ -62,6 +69,12 @@ function App() {
 
         <Route path="/chat-nearby" element={<ChatNearby />} />
         <Route path="/message/:id" element={<Message />} />
+
+
+
+        {/* </Route> */}
+        <Route path="/home/chat" element={<ChatHome />} />
+
 
 
 

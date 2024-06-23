@@ -102,13 +102,38 @@ const newGroupChat = TryCatch(async (req, res, next) => {
 //         // chats,
 //     })
 // })
-const getMyChat = TryCatch(async (req, res) => {
+// const getMyChat = TryCatch(async (req, res) => {
+//     const userId = req.user._id;
+
+//     // Find all chats the user is a member of
+//     const chats = await Chat.find({ members: userId }).populate('members', 'name');
+
+//     console.log(chats);
+//     res.status(200).json({
+//         success: true,
+//         chats: chats
+//     })
+// })
+
+export const getMySingleChats = TryCatch(async (req, res, next) => {
+    const userId = req.user._id;
+
+
+    const chats = await Chat.find({ members: userId, groupChat: false }).populate('members');
+
+    // console.log(chats);
+    res.status(200).json({
+        success: true,
+        chats: chats
+    })
+})
+export const getMyGroupChats = TryCatch(async (req, res, next) => {
     const userId = req.user._id;
 
     // Find all chats the user is a member of
-    const chats = await Chat.find({ members: userId }).populate('members', 'name');
+    const chats = await Chat.find({ members: userId, groupChat: true }).populate('members');
 
-    console.log(chats);
+    // console.log(chats);
     res.status(200).json({
         success: true,
         chats: chats
@@ -119,7 +144,7 @@ const getMyGroups = TryCatch(async (req, res) => {
     const chats = await Chat.find({
         // members: req.user,
         // groupChat: true,
-        creator: req.user
+        creator: req.user._id
     }).populate("members", "name avatar");
 
     res.status(200).json({
@@ -437,7 +462,6 @@ const getMessages = TryCatch(async (req, res, next) => {
 
 export {
     newGroupChat,
-    getMyChat,
     getMyGroups,
     addMembers,
     removeMembers,

@@ -10,13 +10,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, register } from "../../actions/userAction";
 import { useAlert } from "react-alert";
 import Carousel1 from "../carousels/carousel1/Carousel1";
+
+import { usernameValidator } from "../../utils/validators";
+
 import "./register.scss";
+import { Typography } from "@material-ui/core";
 
 const Register = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
 
   const { error, isAuthenticated } = useSelector((state) => state.user);
+  const [validationError, setValidationError] = useState("");
+
 
   const navigate = useNavigate();
 
@@ -30,7 +36,18 @@ const Register = () => {
   const { name, email, username, password } = user;
 
   const registerDataChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setUser({ ...user, [name]: value });
+
+    if (name === "username") {
+      const validationResult = usernameValidator(value);
+      if (!validationResult.isValid) {
+        setValidationError(validationResult.errorMessage);
+      } else {
+        setValidationError("");
+      }
+    }
+    // setUser({ ...user, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
@@ -107,6 +124,11 @@ const Register = () => {
             // onChange={(e) => setLoginEmail(e.target.value)}
             />
           </div>
+          {validationError && (
+            <Typography color="error" variant="caption">
+              {validationError}
+            </Typography>
+          )}
           <div id="loginPassword">
             <LockOpenIcon />
             <input
