@@ -9,6 +9,8 @@ import ChatUsersList from '../../components/chatHome/chatUsersList/ChatUsersList
 import ChatNav from '../../components/chatHome/chatNav/ChatNav';
 import ChatSpace from '../../components/chatHome/ChatSpace/ChatSpace';
 import { getChats } from '../../actions/chatAction';
+import ChatFiles from '../../components/chatHome/chatInfo/chatFiles/ChatFiles';
+import ChatMembers from '../../components/chatHome/chatInfo/chatMembers/ChatMembers';
 
 const ChatHome = () => {
 
@@ -69,11 +71,10 @@ const ChatHome = () => {
             </div>
             <div id="rightChatHome">
                 <div id="top-rightChatHome">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis temporibus ipsam fugiat sit dolor aliquid nemo repellat cum officiis ullam.
+                    <ChatFiles selectedChat={selectedChat} />
                 </div>
                 <div id="bottom-rightChatHome">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla molestias, aliquid labore tempore quaerat magni id! Libero deleniti ipsam minima assumenda sint, temporibus debitis qui consectetur? Atque, repellat ex est veritatis voluptate numquam blanditiis commodi sed sunt, dolor laboriosam odit?
-
+                    <ChatMembers selectedChat={selectedChat} />
                 </div>
             </div>
         </div>

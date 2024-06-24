@@ -3,6 +3,7 @@ import { MdGroups2 } from "react-icons/md";
 import { CiChat2 } from "react-icons/ci";
 import { GiMagicHat } from "react-icons/gi";
 import "./chatNav.scss";
+import { Link } from 'react-router-dom';
 
 const ChatNav = ({ activeItem, onNavClick }) => {
     // const [activeItem, setActiveItem] = useState('myChats');
@@ -13,16 +14,18 @@ const ChatNav = ({ activeItem, onNavClick }) => {
 
     return (
         <div id='chatNav'>
-            <div id="logo">
-                <h3>Anywhere</h3>
-            </div>
+            <Link to="/">
+                <div id="logo">
+                    <h3>Anywhere</h3>
+                </div>
+            </Link>
             <div id="chatNavContent">
                 <div
                     className={`chatNavContentItems ${activeItem === 'myChats' ? 'active' : ''}`}
                     onClick={() => onNavClick('myChats')}
                 >
                     <div>
-                        <CiChat2 size={40} color='black' />
+                        <CiChat2 size={40} color='white' />
                     </div>
                     <span>My Chats</span>
                 </div>
@@ -31,7 +34,7 @@ const ChatNav = ({ activeItem, onNavClick }) => {
                     onClick={() => onNavClick('groups')}
                 >
                     <div>
-                        <MdGroups2 size={40} color='black' />
+                        <MdGroups2 size={40} color='white' />
                     </div>
                     <span>My groups</span>
                 </div>
@@ -40,7 +43,7 @@ const ChatNav = ({ activeItem, onNavClick }) => {
                     onClick={() => onNavClick('unknown')}
                 >
                     <div>
-                        <GiMagicHat size={40} color='black' />
+                        <GiMagicHat size={40} color='white' />
                     </div>
                     <span>New Chats</span>
                 </div>

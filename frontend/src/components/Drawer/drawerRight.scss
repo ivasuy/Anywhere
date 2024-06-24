@@ -1,5 +1,6 @@
 #drawerRight {
     overflow: auto;
+    display: none;
 }
 
 #hamburgerIcon {
@@ -43,6 +44,10 @@
 }
 
 @media screen and (max-width: 900px) {
+    #drawerRight {
+        display: block;
+    }
+
     #bottomRightMyFeedDrawer {
         display: block;
     }

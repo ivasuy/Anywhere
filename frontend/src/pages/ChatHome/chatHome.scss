@@ -3,9 +3,10 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: rgba(241, 245, 7);
+    // background-color: rgba(241, 245, 7);
+    background-color: rgba(58, 58, 58);
     height: 96%;
-    color: black;
+    color: rgb(255, 255, 255);
     border-radius: 20px;
     margin: 10px;
     padding: 10px;
@@ -69,13 +70,23 @@
             flex: 1;
             border-radius: 20px;
             padding: 10px;
+            height: 40%;
+            width: 95%;
+            // overflow: auto;
+            // -ms-overflow-style: none;
         }
+
+        // #top-rightChatHome::-webkit-scrollbar {
+        //     display: none;
+        // }
 
         #bottom-rightChatHome {
             background-color: rgba(1, 1, 1, 0.9);
             flex: 1;
             border-radius: 20px;
             padding: 10px;
+            height: 40%;
+            width: 95%;
         }
     }
 }

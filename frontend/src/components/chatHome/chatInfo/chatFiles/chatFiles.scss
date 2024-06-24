@@ -1,0 +1,27 @@
+#chatFiles {
+    height: 100%;
+    width: 100%;
+
+    #chatFiles-heading {
+        font: 300 4vh "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS";
+    }
+
+    #chatFiles-subHeading {
+        font: 300 2vh "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS";
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    #chatFiles-data {
+        height: 80%;
+        width: 100%;
+        border-radius: 20px;
+        overflow: auto;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    #chatFiles::-webkit-scrollbar {
+        display: none;
+    }
+}

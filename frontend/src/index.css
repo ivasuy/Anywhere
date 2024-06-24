@@ -10,4 +10,12 @@ body,
     background-image: linear-gradient(to bottom,rgb(0, 0, 0, 0.5), rgb(255, 255, 255, 0));
     color: white;
     /* Optional: Hide horizontal scrollbar if not needed */
+    -ms-overflow-style: none;
+        scrollbar-width: none;
+}
+
+/* html,
+body, */
+#root::-webkit-scrollbar {
+    display: none;
 }

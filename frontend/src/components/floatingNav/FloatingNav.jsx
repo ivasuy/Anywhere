@@ -3,10 +3,11 @@ import React from 'react';
 import './floatingNav.scss';
 import { Link, useLocation } from 'react-router-dom';
 
-import ViewQuiltOutlinedIcon from '@material-ui/icons/ViewQuiltOutlined';
-import PeopleIcon from '@material-ui/icons/People';
-import PublicIcon from '@material-ui/icons/Public';
-import PersonIcon from '@material-ui/icons/Person';
+
+import { PiLayoutThin } from "react-icons/pi";
+import { TbFriends } from "react-icons/tb";
+import { BiWorld } from "react-icons/bi";
+import { BsPerson } from "react-icons/bs";
 
 const FloatingNav = () => {
     const location = useLocation();
@@ -15,21 +16,21 @@ const FloatingNav = () => {
         <div id='fl-nav'>
             <div id="floating-nav">
                 <Link to="/my-feed" id="myfeed" className={location.pathname === '/my-feed' ? 'active' : ''}>
-                    <ViewQuiltOutlinedIcon fontSize="medium" style={{ color: "white" }} />
+                    <PiLayoutThin size={30} color='white' />
                     <span className={location.pathname === '/my-feed' ? 'activeDesc' : ''}> My Feed</span>
 
                 </Link>
                 <Link to="/explore-nearby" id="explore-nearby" className={location.pathname === '/explore-nearby' ? 'active' : ''}>
-                    <PeopleIcon fontSize="medium" style={{ color: "white" }} />
+                    <TbFriends size={30} color='white' />
                     <span className={location.pathname === '/explore-nearby' ? 'activeDesc' : ''}> Explore Nearby</span>
 
                 </Link>
                 <Link to="/explore-world" id="explore-world" className={location.pathname === '/explore-world' ? 'active' : ''}>
-                    <PublicIcon fontSize="medium" style={{ color: "white" }} />
-                    <span className={location.pathname === '/explore-world' ? 'activeDesc' : ''}> Explore World</span>
+                    <BiWorld size={30} color='white' />
+                    <span className={location.pathname === '/explore-world' ? 'activeDesc' : ''}> Explore Channels</span>
                 </Link>
                 <Link to="/myself" id="myself" className={location.pathname === '/myself' ? 'active' : ''}>
-                    <PersonIcon fontSize="medium" style={{ color: "white" }} />
+                    <BsPerson size={30} color='white' />
                     <span className={location.pathname === '/myself' ? 'activeDesc' : ''}> My profile</span>
                 </Link>
             </div >
