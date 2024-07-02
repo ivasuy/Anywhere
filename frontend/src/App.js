@@ -10,7 +10,6 @@ import store from "./store"
 import MyFeed from "./pages/Myfeed/MyFeed";
 import ExploreNearby from "./pages/ExploreNearby/ExploreNearby";
 import ExploreWorld from "./pages/ExploreWorld/ExploreWorld";
-import Myself from "./pages/Myself/Myself";
 import { useDispatch, useSelector } from "react-redux";
 import ProtectRoute from "./components/auth/ProtectRoute";
 import NotFound from "./pages/notFound/NotFound";
@@ -18,6 +17,8 @@ import ChatNearby from "./pages/ChatNearby/ChatNearby";
 import { fetchCoords } from './utils/fetchCoords';
 import Message from "./components/chatHome/Message/Message";
 import ChatHome from "./pages/ChatHome/ChatHome";
+import UserProfile from "./pages/UserProfile/UserProfile";
+import Notifications from "./pages/NotificationPage/Notifications";
 
 
 function App() {
@@ -65,10 +66,11 @@ function App() {
         <Route path="/my-feed" element={<MyFeed />} />
         <Route path="/explore-nearby" element={<ExploreNearby />} />
         <Route path="/explore-world" element={<ExploreWorld />} />
-        <Route path="/myself" element={<Myself />} />
+        <Route path="/user/:id" element={<UserProfile />} />
 
         <Route path="/chat-nearby" element={<ChatNearby />} />
         <Route path="/message/:id" element={<Message />} />
+        <Route path="/notifications" element={<Notifications />} />
 
 
 

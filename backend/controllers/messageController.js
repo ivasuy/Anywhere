@@ -1,6 +1,7 @@
 import { TryCatch } from "../middleware/error";
 import { Chat } from "../models/chatModel";
 import { Message } from "../models/messageModel";
+import { Notification } from "../models/notificationModel";
 
 const sendMessage = TryCatch(async (req, res, next) => {
     const { chatId, message } = req.body;
@@ -25,11 +26,23 @@ const sendMessage = TryCatch(async (req, res, next) => {
         });
 
         await newMessage.save();
+        // Create notifications for other chat members
+        chat.members.forEach(async (member) => {
+            if (member._id.toString() !== loggedInUserId.toString()) {
+                await Notification.create({
+                    user: member._id,
+                    type: "message",
+                    message: `New message from ${req.user.name}: ${message}`,
+                });
+            }
+        });
 
         res.status(201).json({ success: true, message: "Message sent successfully", message: newMessage });
     } catch (error) {
         res.status(500).json({ success: false, message: "Internal server error", error: error.message });
     }
 });
+
+
 
 export default sendMessage;

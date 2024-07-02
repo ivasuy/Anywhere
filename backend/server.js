@@ -1,5 +1,4 @@
 import app from "./app.js";
-// import cloudinary from "cloudinary"; // Example import, if needed
 import connectDatabase from "./config/database.js";
 import bodyParser from "body-parser";
 import dotenv from 'dotenv';

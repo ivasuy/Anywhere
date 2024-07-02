@@ -36,14 +36,14 @@ const userSchema = mongoose.Schema(
                 type: String,
                 maxLength: [100, "Occupation cannot exceed 100 characters"],
             },
-            city: {
-                type: String,
-                maxLength: [50, "City name cannot exceed 50 characters"],
-            },
-            state: {
-                type: String,
-                maxLength: [50, "State name cannot exceed 50 characters"],
-            },
+            // city: {
+            //     type: String,
+            //     maxLength: [50, "City name cannot exceed 50 characters"],
+            // },
+            // state: {
+            //     type: String,
+            //     maxLength: [50, "State name cannot exceed 50 characters"],
+            // },
             about: {
                 type: String,
                 maxLength: [500, "Bio cannot exceed 500 characters"],

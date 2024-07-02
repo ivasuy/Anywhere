@@ -19,7 +19,7 @@ const ChatNearby = () => {
 
   const [warning, setWarning] = useState(false);
   const [createPostPermission, setCreatePostPermission] = useState(false);
-  const [sendPublicMessage, setSendPublicMessage] = useState(false);
+  // const [sendPublicMessage, setSendPublicMessage] = useState(false);
   const [createMessageFlag, setCreateMessageFlag] = useState(false);
 
   const allUsers = useSelector((state) => state.location_users);
@@ -91,7 +91,7 @@ const ChatNearby = () => {
       )}
       {!warning && createPostPermission && (
         <div id="createPost">
-          <CreatePost setCreatePostPermission={setCreatePostPermission} />
+          <CreatePost setCreatePostPermission={setCreatePostPermission} accessFlag={false} />
         </div>
       )}
       {/* {!warning && createMessageFlag && (

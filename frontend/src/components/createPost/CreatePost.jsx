@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./createPost.scss";
 import { FaTimes, FaShare } from "react-icons/fa";
 import UserList from '.././usersList/UsersList'; // Make sure you import your UserList component
+import ChumList from "../chumList/ChumList"; // Import ChumList component
 
 const CreatePost = ({ setCreatePostPermission, accessFlag }) => {
     const [post, setPost] = useState({
@@ -27,7 +28,7 @@ const CreatePost = ({ setCreatePostPermission, accessFlag }) => {
         }));
     };
 
-    const handlePostSubmit = () => {
+    const handlePublicPostSubmit = () => {
         setShowUserList(true); // Show the user list view
     };
 
@@ -61,9 +62,9 @@ const CreatePost = ({ setCreatePostPermission, accessFlag }) => {
         }
     };
 
-    // useEffect(() => {
-    //     console.log("Post data:", post);
-    // }, [post]);
+    useEffect(() => {
+        console.log("accessFlag:", accessFlag);
+    }, [accessFlag]);
 
     return (
         <div className="create-post-overlay">
@@ -130,12 +131,12 @@ const CreatePost = ({ setCreatePostPermission, accessFlag }) => {
                             {!accessFlag && <span>The private posts cannot be shared from this section. If you want to make a post private then you need to do it manually from user page.</span>}
                         </div>
 
-                        <button onClick={handlePostSubmit} className="submit-button">
+                        <button onClick={handlePublicPostSubmit} className="submit-button">
                             <FaShare /> Share with
                         </button>
                     </>
                 ) : (
-                    <UserList post={post} setShowUserList={setShowUserList} setCreatePostPermission={setCreatePostPermission} />
+                    accessFlag ? <ChumList post={post} setShowUserList={setShowUserList} setCreatePostPermission={setCreatePostPermission} /> : <UserList post={post} setShowUserList={setShowUserList} setCreatePostPermission={setCreatePostPermission} />
                 )}
             </div>
         </div>

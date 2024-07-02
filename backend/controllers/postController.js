@@ -1,4 +1,5 @@
 import { TryCatch } from "../middleware/error.js";
+import { Notification } from "../models/notificationModel.js";
 import { Post } from "../models/postModel.js";
 import userModel from "../models/userModel.js";
 import { ErrorHandler } from "../utils/errorHandler.js";
@@ -64,4 +65,29 @@ const createNewPost = TryCatch(async (req, res, next) => {
     });
 });
 
-export { createNewPost };
+
+const upvotePost = TryCatch(async (req, res, next) => {
+    const { postId } = req.body;
+    const loggedInUserId = req.user._id;
+
+    const post = await Post.findById(postId);
+
+    if (!post) {
+        return res.status(404).json({ success: false, message: "Post not found" });
+    }
+
+    post.upvotes += 1;
+    await post.save();
+
+    // Create a notification for the post creator
+    await Notification.create({
+        user: post.creator,
+        type: "upvote",
+        message: `${req.user.name} upvoted your post.`,
+    });
+
+    res.status(200).json({ success: true, message: "Post upvoted successfully" });
+});
+
+
+export { createNewPost, upvotePost };

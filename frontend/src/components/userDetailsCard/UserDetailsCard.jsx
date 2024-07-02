@@ -185,6 +185,7 @@ const UserDetailsCard = ({ self, user }) => {
           repellendus eaque quam. Quo suscipit laborum fuga in!
         </span>
       </div>
+
       {!self && (
         <div id="bottomUserCardDetails">
           <div id="buttonsbottomUserCardDetails">
@@ -193,9 +194,11 @@ const UserDetailsCard = ({ self, user }) => {
           </div>
         </div>
       )}
-      <div id="exploreUserButton">
-        <button>Explore User</button>
-      </div>
+      {user && <Link to={`/user/${user._id}`}>
+        <div id="exploreUserButton">
+          <button>Explore User</button>
+        </div>
+      </Link>}
     </div>
   );
 };

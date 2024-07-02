@@ -1,20 +1,18 @@
 
 import React, { useEffect, useState } from 'react';
 import userFace from "../../assets/userFace.jpg";
-import "./usersList.scss";
+import "./chumList.scss";
 import { useDispatch, useSelector } from 'react-redux';
-import DistanceSlider from '../DistanceSlider/DistanceSlider';
 import { createNewPost } from '../../actions/postAction';
 import { useAlert } from "react-alert";
 import { FaSearch } from "react-icons/fa";
-
 
 
 import { Link, useNavigate } from "react-router-dom";
 import { NEW_POST_RESET } from '../../constants/postConstants';
 
 
-const UsersList = ({ post, setShowUserList, setCreatePostPermission }) => {
+const ChumList = ({ post, setShowUserList, setCreatePostPermission }) => {
     const alert = useAlert();
 
     const navigate = useNavigate();
@@ -89,16 +87,10 @@ const UsersList = ({ post, setShowUserList, setCreatePostPermission }) => {
 
     return (
         <div className='usersContainer'>
-            <h1>Nearby Users</h1>
-            <div id="distSlide">
+            <h1>All Chums</h1>
+            {/* <div id="distSlide">
                 <DistanceSlider />
-            </div>
-            <div id="search-users">
-                <div className="search-container">
-                    <FaSearch className="search-icon" color='black' />
-                    <input type="text" placeholder="Search users" />
-                </div>
-            </div>
+            </div> */}
             <div className='usersList'>
                 {allUsers && allUsers.users.length > 0 ? (
                     <>
@@ -112,6 +104,12 @@ const UsersList = ({ post, setShowUserList, setCreatePostPermission }) => {
                         </div>
                         <div id="userCount">
                             <span>Showing {allUsers.users.length} results</span>
+                        </div>
+                        <div id="search-users">
+                            <div className="search-container">
+                                <FaSearch className="search-icon" color='black' />
+                                <input type="text" placeholder="Search chums" />
+                            </div>
                         </div>
                         {allUsers.users.map((user) => (
                             <div className="userDetails" key={user._id} onClick={() => handleUserClick(user)}>
@@ -137,5 +135,5 @@ const UsersList = ({ post, setShowUserList, setCreatePostPermission }) => {
     );
 };
 
-export default UsersList;
+export default ChumList;
 

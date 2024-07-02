@@ -1,0 +1,42 @@
+#switchPosts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font: 300 2vh "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS";
+    width: 100%;
+}
+
+.top-menu {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.menu-item {
+    margin: 0 15px;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.menu-item.active {
+    border-bottom: 2px solid #007bff;
+    /* Active border color */
+}
+
+.posts {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.public-posts,
+.private-posts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+}

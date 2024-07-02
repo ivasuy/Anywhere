@@ -4,6 +4,7 @@ import { TryCatch } from "../middleware/error.js";
 import { Request } from "../models/requestModel.js"
 import { emitEvent } from "../utils/apifeatures.js"
 import userModel from "../models/userModel.js";
+import { Notification } from '../models/notificationModel.js';
 
 
 export const sendChumRequest = TryCatch(async (req, res, next) => {
@@ -22,6 +23,14 @@ export const sendChumRequest = TryCatch(async (req, res, next) => {
         sender: req.user,
         receiver: userId,
     });
+
+    // Create a notification for the receiver
+    await Notification.create({
+        user: userId,
+        type: "chumRequest",
+        message: `${req.user.name} has sent you a chum request.`,
+    });
+
     emitEvent(req, NEW_REQUEST, [userId]);
 
     return res.status(200).json({
