@@ -4,14 +4,17 @@ import { Link, useNavigate } from "react-router-dom";
 import userFace from "../../assets/userFace.jpg";
 import { BiSolidMessageRoundedAdd } from "react-icons/bi";
 import axios from "axios";
+import { useAlert } from "react-alert";
+
 
 const UserDetailsCard = ({ self, user }) => {
 
   const navigate = useNavigate();
+  const alert = useAlert();
 
   const [count, setCount] = useState({});
   const [checkBehold, setcheckBehold] = useState(false);
-  // const [newChat, setNewChat] = useState({});
+  const [checkChum, setcheckChum] = useState(false);
 
 
   const fetchCount = async (user) => {
@@ -108,6 +111,12 @@ const UserDetailsCard = ({ self, user }) => {
         config
       );
       // console.log("success", data.message);
+
+      if (data.success) {
+        setcheckChum(!checkChum);
+      }
+
+
       fetchCount(user); // Update the count after a successful "chum" request
     } catch (error) {
       console.log("error", error.response?.data?.message || error.message);
@@ -190,7 +199,8 @@ const UserDetailsCard = ({ self, user }) => {
         <div id="bottomUserCardDetails">
           <div id="buttonsbottomUserCardDetails">
             {!checkBehold ? <button onClick={handleBeholdUser}>behold</button> : <button onClick={handleUndoBehold} id="undoBeholdButton">Undo behold</button>}
-            <button onClick={handleChumRequest}>chum request</button>
+            {!checkChum ? <button onClick={handleChumRequest}>chum request</button> : <button onClick={handleUndoBehold} id="undoBeholdButton">Chum request sent</button>}
+            {/* <button onClick={handleChumRequest}>chum request</button> */}
           </div>
         </div>
       )}

@@ -4,6 +4,7 @@ import { locationReducer, userLocationReducer } from "./reducers/locationReducer
 import { newPostReducer } from "./reducers/postReducer";
 import { newRequestReducer } from "./reducers/requestReducer";
 import { allChatReducer } from "./reducers/chatReducer";
+import { allNotificationsReducer } from "./reducers/notificationReducer";
 
 const store = configureStore({
     reducer: {
@@ -13,6 +14,7 @@ const store = configureStore({
         new_post: newPostReducer,
         new_request: newRequestReducer,
         all_chats: allChatReducer,
+        all_notifications: allNotificationsReducer
     },
 })
 

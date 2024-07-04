@@ -10,6 +10,7 @@ import { createUser } from "./seeders/userSeed.js";
 import { createGroupChats, createMessagesInAChat, createSingleChats } from "./seeders/chatSeed.js";
 import { postRouter } from "./routes/postRoute.js";
 import { requestRouter } from "./routes/requestRoute.js";
+import { notificationRouter } from "./routes/notificationRoute.js";
 
 
 
@@ -42,6 +43,7 @@ app.use("/api/v1", locationRouter)
 app.use("/api/v1/chat", chatRouter)
 app.use("/api/v1/post", postRouter)
 app.use("/api/v1/request", requestRouter)
+app.use("/api/v1/notifications", notificationRouter)
 
 app.use(errorMiddleware);
 
