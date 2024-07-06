@@ -46,6 +46,8 @@ const Notifications = () => {
                 accept: true
             }, config);
 
+            fetchAllRequests();
+
             console.log(data);
 
         } catch (error) {
@@ -67,6 +69,8 @@ const Notifications = () => {
                 requestId: requestId,
                 accept: false
             }, config);
+
+            fetchAllRequests();
 
             console.log(data);
 

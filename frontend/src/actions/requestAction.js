@@ -28,6 +28,7 @@ export const createNewChumRequest = (userId) => async (dispatch) => {
     }
 }
 
+
 export const clearErrors = () => async (dispatch) => {
     dispatch({ type: CLEAR_ERRORS });
 };

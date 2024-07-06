@@ -10,13 +10,13 @@ import mongoose from 'mongoose';
 
 export const sendChumRequest = TryCatch(async (req, res, next) => {
 
-    console.log("ghode k bache");
+    // console.log("ghode k bache");
     const { userId } = req.body;
 
     const request = await Request.findOne({
         $or: [
-            { sender: req.user, receiver: userId },
-            { sender: userId, receiver: req.user },
+            { sender: req.user._id, receiver: userId },
+            { sender: userId, receiver: req.user._id },
         ],
     });
 
@@ -47,21 +47,13 @@ export const sendChumRequest = TryCatch(async (req, res, next) => {
 export const acceptChumRequest = TryCatch(async (req, res, next) => {
     const { requestId, accept } = req.body;
 
-
     const request = await Request.findById(requestId)
         .populate("sender", "name")
         .populate("receiver", "name");
 
-    console.log("lode k bache", request)
 
     if (!request) {
         return next(new ErrorHandler("Request not found", 404));
-    }
-
-    if (request.receiver._id.toString() !== req.user._id.toString()) {
-        return next(
-            new ErrorHandler("You are not authorized to accept this request", 401)
-        );
     }
 
     if (!accept) {
@@ -71,6 +63,13 @@ export const acceptChumRequest = TryCatch(async (req, res, next) => {
             message: "Chum Request Rejected",
         });
     }
+
+    if (request.receiver._id.toString() !== req.user._id.toString()) {
+        return next(
+            new ErrorHandler("You are not authorized to accept this request", 401)
+        );
+    }
+
 
     const senderId = request.sender._id;
     const receiverId = request.receiver._id;
@@ -92,38 +91,6 @@ export const acceptChumRequest = TryCatch(async (req, res, next) => {
         senderId: senderId,
     });
 });
-
-export const checkChumRequestStatus = TryCatch(async (req, res) => {
-    const { userId } = req.body; // ID of the user to check the request status for
-    const loggedInUserId = req.user._id; // ID of the logged-in user
-
-    // Check if there is a pending request
-    const request = await Request.findOne({
-        $or: [
-            { sender: loggedInUserId, receiver: userId },
-            { sender: userId, receiver: loggedInUserId }
-        ]
-    });
-
-    if (request) {
-        // If request is found, return its status
-        return res.status(200).json({ status: request.status });
-    } else {
-        // If no request is found, check if the user is in the logged-in user's chum list
-        const loggedInUser = await userModel.findById(loggedInUserId).populate('chums');
-
-        const isChum = loggedInUser.chums.some(chum => chum._id.equals(userId));
-
-        if (isChum) {
-            // If user is in the chum list, the request is accepted
-            return res.status(200).json({ status: "accepted" });
-        } else {
-            // If user is not in the chum list, the request is rejected
-            return res.status(200).json({ status: "rejected" });
-        }
-    }
-});
-
 
 export const beholdUser = TryCatch(async (req, res, next) => {
     const { userId } = req.body;
@@ -206,6 +173,63 @@ export const checkBeholdUser = TryCatch(async (req, res, next) => {
     });
 });
 
+export const checkChumStatus = TryCatch(async (req, res, next) => {
+    const { userId } = req.body;
+    const loggedInUserId = req.user._id;
+
+    const loggedInUser = await userModel.findById(loggedInUserId).populate('chumList');
+
+    if (!loggedInUser) {
+        return res.status(404).json({ success: false, message: "Logged-in User not found" });
+    }
+
+    const isUserInChumList = loggedInUser.chumList.some(chum => chum._id.toString() === userId);
+
+    if (isUserInChumList) {
+        return res.status(200).json({
+            success: true, request: true,
+            request_sender: true,
+            chum: true,
+            userId: userId
+        });
+    }
+
+    const request = await Request.findOne({
+        $or: [
+            { sender: loggedInUserId, receiver: userId },
+            { sender: userId, receiver: loggedInUserId }
+        ]
+    });
+
+
+    if (request) {
+        // console.log("request.sender", request.sender)
+        // console.log("loggedInUserId", loggedInUserId)
+        if (request.sender.equals(loggedInUserId)) {
+            return res.status(200).json({
+                request: true,
+                request_sender: true,
+                chum: false,
+                userId: userId
+            });
+        } else if (request.sender.equals(userId)) {
+            return res.status(200).json({
+                request: true,
+                request_sender: false,
+                chum: false,
+                userId: userId
+            });
+        }
+    }
+
+    return res.status(200).json({
+        request: false,
+        request_sender: false,
+        chum: false,
+        userId: userId
+    });
+});
+
 
 export const fetchCount = TryCatch(async (req, res, next) => {
 
@@ -217,8 +241,9 @@ export const fetchCount = TryCatch(async (req, res, next) => {
     });
 
     // Find the logged-in user's beholdList
-    const loggedInUser = await userModel.findById(currentUserId).select("beholdList");
-    const countBeholdListUsers = loggedInUser ? loggedInUser.beholdList.length : 0;
+    const user = await userModel.findById(currentUserId).select("beholdList chumList");
+    const countBeholdListUsers = user ? user.beholdList.length : 0;
+    const countChumListUsers = user ? user.chumList.length : 0;
 
 
     res.status(200).json({
@@ -226,6 +251,7 @@ export const fetchCount = TryCatch(async (req, res, next) => {
         count: {
             countBeheldByOthers,
             countBeholdListUsers,
+            countChumListUsers
         },
         // message: `Total users who have beheld the current user: ${countBeheldByOthers}, Total users beheld by the current user: ${countBeheldByLoggedInUser}`,
     });
@@ -241,7 +267,7 @@ export const myAllRequests = TryCatch(async (req, res) => {
     // Find requests where the user is the sender
     const sentRequests = await Request.find({ sender: userId }).populate("sender receiver").sort({ createdAt: -1 });
 
-    console.log(receivedRequests);
+    // console.log(receivedRequests);
 
     // Send the results
     res.status(200).json({
@@ -249,4 +275,36 @@ export const myAllRequests = TryCatch(async (req, res) => {
         sentRequests,
     });
 });
+
+export const getPurposeRequests = TryCatch(async (req, res) => {
+
+    const { userId, purpose } = req.body;
+
+    if (purpose === "accept") {
+        const request = await Request.findOne({ sender: userId, receiver: req.user._id }).populate("sender receiver")
+
+        console.log(request);
+
+        return res.status(200).json({
+            success: true,
+            request
+        })
+    }
+
+    else if (purpose === "delete") {
+
+        const request = await Request.findOne({ sender: req.user._id, receiver: userId }).populate("sender receiver");
+
+        return res.status(200).json({
+            success: true,
+            request
+        })
+    }
+
+    return res.status(400).json({
+        success: false,
+        message: "No request fetched from purpose"
+    })
+
+})
 

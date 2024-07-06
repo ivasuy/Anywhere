@@ -16,8 +16,118 @@ const UserDetailsCard = ({ self, user }) => {
   const [checkBehold, setcheckBehold] = useState(false);
   const [checkChum, setcheckChum] = useState(false);
 
+  const [requestFlag, setrequestFlag] = useState(false)
+  const [request_senderFlag, setrequest_senderFlag] = useState(false)
+  const [chumFlag, setChumFlag] = useState(false)
 
-  const fetchCount = async (user) => {
+
+  const ChumStatus = ({ request, request_sender, chum, handleSendChumRequest, handleAcceptChumRequest, handleRemoveChum, handleDeleteChumRequest }) => {
+    if (request && request_sender) {
+      return <button id="deleteChumR" onClick={handleDeleteChumRequest}>Delete Chum Request</button>;
+    }
+
+    if (request && !request_sender) {
+      return <button onClick={handleAcceptChumRequest} id="acceptChumR">Accept Chum Request</button>;
+    }
+
+    if (chum) {
+      return <button onClick={handleRemoveChum} id="removeChum">Remove Chum</button>;
+    }
+
+
+    return <button onClick={handleSendChumRequest} id="sendChumR">Send Chum Request</button>;
+  };
+
+  const getPurposeRequest = async (purpose) => {
+    try {
+      const config = {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true
+      };
+
+      const { data } = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/v1/request/purpose-request`, {
+        userId: user._id,
+        purpose
+      }, config);
+
+      console.log(data);
+      return data.request;
+
+    } catch (error) {
+      console.log("Error occurred in getting request:", error.message);
+      throw error; // Re-throw the error to handle it in the calling function
+    }
+  }
+
+  const handleDeleteChumRequest = async (e) => {
+    e.preventDefault();
+
+    try {
+      const request = await getPurposeRequest("delete");
+
+      if (!request) {
+        console.log("No request found for deletion.");
+        return;
+      }
+
+      console.log("Delete request:", request);
+      console.log("requestid", request._id);
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true
+      };
+
+      const { data } = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/v1/request/accept-chum-request`, {
+        requestId: request._id,
+        accept: false
+      }, config);
+
+      console.log(data);
+
+      fetchCount();// Assuming this updates the UI
+      checkChumStatus()
+
+    } catch (error) {
+      console.log("Error occurred in deleting request:", error.message);
+    }
+  }
+
+  const handleAcceptChumRequest = async (e) => {
+    e.preventDefault();
+
+    const request = await getPurposeRequest("accept");
+
+    console.log("accept request success", request);
+
+
+    const requestId = request._id
+
+    try {
+      console.log("accept id", requestId);
+      const config = {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true
+      };
+
+      const { data } = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/v1/request/accept-chum-request`, {
+        requestId: requestId,
+        accept: true
+      }, config);
+
+      console.log(data);
+
+      fetchCount();
+      checkChumStatus()
+
+    } catch (error) {
+      console.log("error occured in accepting request", error.message)
+    }
+
+  }
+
+
+  const fetchCount = async () => {
     try {
       const config = {
         headers: { "Content-Type": "application/json" },
@@ -29,7 +139,7 @@ const UserDetailsCard = ({ self, user }) => {
         config
       );
       setCount(data.count);
-      // console.log(user);
+
     } catch (error) {
       console.log("error", error.response?.data?.message || error.message);
     }
@@ -56,7 +166,7 @@ const UserDetailsCard = ({ self, user }) => {
     }
   };
 
-  const checkBeholdUser = async (user) => {
+  const checkBeholdUser = async () => {
     try {
       const config = {
         headers: { "Content-Type": "application/json" },
@@ -90,21 +200,51 @@ const UserDetailsCard = ({ self, user }) => {
       // console.log("success", data.message);
       setcheckBehold(false);
 
-      fetchCount(user); // Update the count after a successful "behold" request
+      fetchCount(); // Update the count after a successful "behold" request
     } catch (error) {
       console.log("error", error.response?.data?.message || error.message);
     }
 
   }
 
+  const checkChumStatus = async () => {
+    try {
+      const config = {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      };
+      const { data } = await axios.put(
+        `${process.env.REACT_APP_BACKEND_URL}/api/v1/request/status`,
+        { userId: user._id },
+        config
+      );
 
-  const handleChumRequest = async (e) => {
+      // console.log(data);
+      // console.log('API response:', data);
+
+      const { request, request_sender, chum, userId } = data;
+
+      setrequestFlag(request);
+      setrequest_senderFlag(request_sender);
+      setChumFlag(chum);
+
+      fetchCount();
+
+    } catch (error) {
+      console.log("error", error.response?.data?.message || error.message);
+    }
+  }
+
+
+  const handleSendChumRequest = async (e) => {
     e.preventDefault();
     try {
       const config = {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
       };
+
+
       const { data } = await axios.put(
         `${process.env.REACT_APP_BACKEND_URL}/api/v1/request/send-chum-request`,
         { userId: user._id },
@@ -117,7 +257,7 @@ const UserDetailsCard = ({ self, user }) => {
       }
 
 
-      fetchCount(user); // Update the count after a successful "chum" request
+      fetchCount(); // Update the count after a successful "chum" request
     } catch (error) {
       console.log("error", error.response?.data?.message || error.message);
     }
@@ -149,11 +289,13 @@ const UserDetailsCard = ({ self, user }) => {
   }
 
   useEffect(() => {
-    if (user) {
-      fetchCount(user);
-      checkBeholdUser(user);
-    }
-  }, [user, checkBehold]);
+    // if (user) {
+    fetchCount();
+    checkBeholdUser();
+    checkChumStatus();
+    // }
+  }, [checkBehold, checkChum, requestFlag, request_senderFlag, chumFlag]);
+
 
   return (
     <div id="UserDetailsCard">
@@ -199,8 +341,15 @@ const UserDetailsCard = ({ self, user }) => {
         <div id="bottomUserCardDetails">
           <div id="buttonsbottomUserCardDetails">
             {!checkBehold ? <button onClick={handleBeholdUser}>behold</button> : <button onClick={handleUndoBehold} id="undoBeholdButton">Undo behold</button>}
-            {!checkChum ? <button onClick={handleChumRequest}>chum request</button> : <button onClick={handleUndoBehold} id="undoBeholdButton">Chum request sent</button>}
-            {/* <button onClick={handleChumRequest}>chum request</button> */}
+            <ChumStatus
+              request={requestFlag}
+              request_sender={request_senderFlag}
+              chum={chumFlag}
+              handleSendChumRequest={handleSendChumRequest}
+              handleAcceptChumRequest={handleAcceptChumRequest}
+              // handleRemoveChum={handleRemoveChum}
+              handleDeleteChumRequest={handleDeleteChumRequest}
+            />
           </div>
         </div>
       )}
