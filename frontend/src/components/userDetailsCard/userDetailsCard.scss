@@ -145,6 +145,20 @@
                 color: black;
                 border: none;
             }
+
+            #deleteChumR {
+                border: 1px solid red;
+            }
+
+            #acceptChumR {
+                background-color: green;
+                border: none;
+            }
+
+            #removeChum {
+                border: none;
+                background-color: red;
+            }
         }
 
     }
