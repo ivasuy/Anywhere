@@ -30,7 +30,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 app.use(cors({
-    origin: "http://localhost:3000", // Add your frontend URL here
+    // origin: "http://localhost:3000", // Add your frontend URL here
+    origin: "https://genuine-raindrop-cc3fc6.netlify.app", // Add your frontend URL here
     // origin: process.env.FRONTEND_URL, // Add your frontend URL here
     credentials: true, // Allow cookies to be sent with the request
     methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed methods
