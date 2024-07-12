@@ -74,7 +74,6 @@ const UsersList = ({ post, setShowUserList, setCreatePostPermission }) => {
     useEffect(() => {
 
         if (success) {
-            console.log("UseEffect Triggered with success:", success);
             alert.success("Post created succesfully");
             setShowUserList(false)
             setCreatePostPermission(false);

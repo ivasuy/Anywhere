@@ -11,59 +11,19 @@ const UserCardAndPhotos = ({ self, user }) => {
       <div id="userCard">
         <UserDetailsCard self={self} user={user} />
       </div>
-      <div id="userImages">
-        <img src={userFace} alt="" />
-      </div>
-      <div id="userImages">
-        <img src={userFace} alt="" />
-      </div>
-      <div id="userImages">
-        <img src={userFace} alt="" />
-      </div>
-      <div id="userImages">
-        <img src={userFace} alt="" />
-      </div>
-      <div id="userImages">
-        <img src={userFace} alt="" />
-      </div>
-      <div id="userImages">
-        <img src={userFace} alt="" />
-      </div>
-      <div id="userImages">
-        <img src={userFace} alt="" />
-      </div>
-      <div id="userImages">
-        <img src={userFace} alt="" />
-      </div>
-      <div id="userImages">
-        <img src={userFace} alt="" />
-      </div>
-      <div id="userImages">
-        <img src={userFace} alt="" />
-      </div>
-      <div id="userImages">
-        <img src={userFace} alt="" />
-      </div>
-      <div id="userImages">
-        <img src={userFace} alt="" />
-      </div>
-      <div id="userImages">
-        <img src={userFace} alt="" />
-      </div>
-      <div id="userImages">
-        <img src={userFace} alt="" />
-      </div>
-      <div id="userImages">
-        <img src={userFace} alt="" />
-      </div>
-      <div id="userImages">
-        <img src={userFace} alt="" />
-      </div>
-      <div id="userImages">
-        <img src={userFace} alt="" />
-      </div>
-      <div id="userImages">
-        <img src={userFace} alt="" />
+      <div id="userPublicPostCard">
+        <div className="userImagesinCard">
+          <img src={userFace} alt="" />
+        </div>
+        <div className="userImagesinCard">
+          <img src={userFace} alt="" />
+        </div>
+        <div className="userImagesinCard">
+          <img src={userFace} alt="" />
+        </div>
+        <div className="userImagesinCard">
+          <img src={userFace} alt="" />
+        </div>
       </div>
     </div>
 

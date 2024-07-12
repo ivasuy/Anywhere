@@ -59,6 +59,32 @@ const UserDetailsCard = ({ self, user }) => {
     }
   }
 
+  const handleRemoveChum = async (e) => {
+    e.preventDefault();
+
+    console.log("gonde bache")
+
+    try {
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true
+      };
+
+      const { data } = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/v1/request/delete-chum`, {
+        userId: user._id,
+      }, config);
+
+      console.log(data);
+
+      fetchCount();// Assuming this updates the UI
+      checkChumStatus()
+
+    } catch (error) {
+      console.log("Error occurred in deleting request:", error.message);
+    }
+  }
+
   const handleDeleteChumRequest = async (e) => {
     e.preventDefault();
 
@@ -224,6 +250,8 @@ const UserDetailsCard = ({ self, user }) => {
 
       const { request, request_sender, chum, userId } = data;
 
+      console.log("data lode ", userId, request_sender, request);
+
       setrequestFlag(request);
       setrequest_senderFlag(request_sender);
       setChumFlag(chum);
@@ -322,7 +350,7 @@ const UserDetailsCard = ({ self, user }) => {
             <Link>beholds {count.countBeholdListUsers || 0} users</Link>
           </div>
           <div>
-            <Link>chum with {count.chumCount || 0} users</Link>
+            <Link>chum with {count.countChumListUsers || 0} users</Link>
           </div>
         </div>
       </div>
@@ -347,7 +375,7 @@ const UserDetailsCard = ({ self, user }) => {
               chum={chumFlag}
               handleSendChumRequest={handleSendChumRequest}
               handleAcceptChumRequest={handleAcceptChumRequest}
-              // handleRemoveChum={handleRemoveChum}
+              handleRemoveChum={handleRemoveChum}
               handleDeleteChumRequest={handleDeleteChumRequest}
             />
           </div>

@@ -32,7 +32,7 @@ const DistanceSlider = () => {
     };
 
     return (
-        <div>
+        <div id='distanceSliderContainer'>
             <div id="distanceSlider">
                 <Box sx={{ width: 400 }}>
                     <Slider

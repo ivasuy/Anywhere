@@ -1,6 +1,7 @@
 #drawerRight {
     overflow: auto;
     display: none;
+    box-sizing: border-box;
 }
 
 #hamburgerIcon {
@@ -45,7 +46,11 @@
 
 @media screen and (max-width: 900px) {
     #drawerRight {
-        display: block;
+        // display: block;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: red;
     }
 
     #bottomRightMyFeedDrawer {

@@ -57,7 +57,7 @@ const createNewPost = TryCatch(async (req, res, next) => {
     });
 
 
-    console.log("post Created successfully", newPost)
+    // console.log("post Created successfully", newPost)
 
     res.status(201).json({
         success: true,

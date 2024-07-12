@@ -56,7 +56,7 @@ const ChatNearby = () => {
     <div className="chat-nearby-container">
       <Metadata title="Chat" />
       <div className="chatNearby-top">
-        <h1>Distance Slider</h1>
+        <h1>Set Radius</h1>
         <DistanceSlider />
 
         <div id="distanceChatActionButtons">
@@ -78,7 +78,7 @@ const ChatNearby = () => {
           </div> */}
           <div className="distanceActionButtons">
             <button>
-              Explore channels around you
+              Explore channels around
             </button>
           </div>
         </div>

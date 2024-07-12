@@ -75,6 +75,12 @@ const CreatePost = ({ setCreatePostPermission, accessFlag }) => {
                 {!showUserList ? (
                     <>
                         <h2>Create Post</h2>
+                        <textarea
+                            placeholder="Express your thoughts"
+                            value={post.caption}
+                            onChange={handleCaptionChange}
+                            className="caption-input"
+                        ></textarea>
                         <input
                             type="file"
                             id="fileInput"
@@ -83,7 +89,7 @@ const CreatePost = ({ setCreatePostPermission, accessFlag }) => {
                             style={{ display: "none" }}
                         />
                         <button className="custom-file-button" onClick={handleCustomButtonClick}>
-                            Choose Files
+                            Attach media files
                         </button>
                         <div id="fileDisclaimer">
                             <span>It's all right if you don't want to share media files. You can just express your thoughts.</span>
@@ -96,12 +102,6 @@ const CreatePost = ({ setCreatePostPermission, accessFlag }) => {
                                 </div>
                             ))}
                         </div>
-                        <textarea
-                            placeholder="Express your thoughts"
-                            value={post.caption}
-                            onChange={handleCaptionChange}
-                            className="caption-input"
-                        ></textarea>
 
                         <div id="RadioButtons">
                             <p>Select post accessibility:</p>

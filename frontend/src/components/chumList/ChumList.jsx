@@ -10,6 +10,7 @@ import { FaSearch } from "react-icons/fa";
 
 import { Link, useNavigate } from "react-router-dom";
 import { NEW_POST_RESET } from '../../constants/postConstants';
+import { fetchChums } from '../../actions/requestAction';
 
 
 const ChumList = ({ post, setShowUserList, setCreatePostPermission }) => {
@@ -24,11 +25,10 @@ const ChumList = ({ post, setShowUserList, setCreatePostPermission }) => {
     const dispatch = useDispatch();
     const allUsers = useSelector((state) => state.location_users);
 
+    const { chums } = useSelector((state) => state.all_chums);
+
     const { success, error } = useSelector((state) => state.new_post);
 
-    useEffect(() => {
-        console.log("Users List:", allUsers.users);
-    }, [allUsers]);
 
     const handleUserClick = (user) => {
         setSelectedUsers((prev) => {
@@ -44,7 +44,7 @@ const ChumList = ({ post, setShowUserList, setCreatePostPermission }) => {
         if (selectAll) {
             setSelectedUsers([]);
         } else {
-            setSelectedUsers(allUsers.users.map((user) => user._id));
+            setSelectedUsers(chums.map((user) => user._id));
         }
         setSelectAll(!selectAll);
     };
@@ -70,9 +70,12 @@ const ChumList = ({ post, setShowUserList, setCreatePostPermission }) => {
     };
 
     useEffect(() => {
+        dispatch(fetchChums());
+    }, [])
+
+    useEffect(() => {
 
         if (success) {
-            console.log("UseEffect Triggered with success:", success);
             alert.success("Post created succesfully");
             setShowUserList(false)
             setCreatePostPermission(false);
@@ -92,8 +95,17 @@ const ChumList = ({ post, setShowUserList, setCreatePostPermission }) => {
                 <DistanceSlider />
             </div> */}
             <div className='usersList'>
-                {allUsers && allUsers.users.length > 0 ? (
+                {chums && chums.length > 0 ? (
                     <>
+                        <div id="userCount">
+                            <span>Showing {chums.length} results</span>
+                        </div>
+                        <div id="search-users">
+                            <div className="search-container">
+                                <FaSearch className="search-icon" color='black' />
+                                <input type="text" placeholder="Search chums" />
+                            </div>
+                        </div>
                         <div className="selectAllContainer">
                             <input
                                 type="checkbox"
@@ -102,16 +114,7 @@ const ChumList = ({ post, setShowUserList, setCreatePostPermission }) => {
                             />
                             <span>Select All</span>
                         </div>
-                        <div id="userCount">
-                            <span>Showing {allUsers.users.length} results</span>
-                        </div>
-                        <div id="search-users">
-                            <div className="search-container">
-                                <FaSearch className="search-icon" color='black' />
-                                <input type="text" placeholder="Search chums" />
-                            </div>
-                        </div>
-                        {allUsers.users.map((user) => (
+                        {chums.map((user) => (
                             <div className="userDetails" key={user._id} onClick={() => handleUserClick(user)}>
                                 <input
                                     type="checkbox"
@@ -125,7 +128,7 @@ const ChumList = ({ post, setShowUserList, setCreatePostPermission }) => {
                         ))}
                     </>
                 ) : (
-                    <div id='emptyUserList'>Sorry ! no active users around you to display. Try increasing Radius.</div>
+                    <div id='emptyUserList'>Sorry ! no chums in your chum List</div>
                 )}
             </div>
             <div id="okButton" onClick={handleSubmitPost}>

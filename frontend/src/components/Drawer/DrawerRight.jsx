@@ -36,7 +36,7 @@ const DrawerRight = () => {
         className="bla bla bla"
         enableOverlay={false}
         lockBackgroundScroll={false}
-        size={390}
+        size={370}
         style={{ zIndex: 2, backgroundColor: "rgba(0, 0, 0, 0.90)" }}
       >
         <div id="drawerContent">

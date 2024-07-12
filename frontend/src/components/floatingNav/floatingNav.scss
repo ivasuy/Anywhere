@@ -29,7 +29,7 @@
   transition: transform 0.3s ease;
   position: absolute;
   left: 0;
-  bottom: 25vh;
+  bottom: 24vh;
   // transform: translateY(-30vh);
 }
 
@@ -44,11 +44,12 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  width: 110px;
+  width: 100px;
   /* Adjust the width based on your preference */
   // height: 80vh;
   /* Adjust the height based on your preference */
-  background-color: rgba(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.8);
+  opacity: 2;
   transition: transform 0.3s ease, opacity 0.3s ease;
   padding: 10px;
   border-radius: 20px;
@@ -94,7 +95,7 @@
   display: none;
   padding: 5px;
   text-decoration: none;
-  font: 250 1.2vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+  font: 250 15px "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
     sans-serif;
   color: white;
 }

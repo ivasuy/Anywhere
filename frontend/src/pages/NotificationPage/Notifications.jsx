@@ -122,7 +122,7 @@ const Notifications = () => {
                         <div className="myRequests">
 
                             {receivedRequests && receivedRequests.map((request) => (
-                                <div id='requestContent' key={request._id}>
+                                <div className='requestContent' key={request._id}>
                                     <span><Link to={`/user/:${request.sender._id}`}>@{request.sender.username}</Link> has sent you a chum request</span>
                                     <div id="request-buttons">
                                         <button onClick={(e) => handleAcceptChumRequest(e, request._id)}>Accept</button>
@@ -140,7 +140,7 @@ const Notifications = () => {
                     ) : (
                         <div className="myRequests">
                             {sentRequests && sentRequests.map((request) => (
-                                <div id='requestContent'>
+                                <div className='requestContent'>
                                     <span>You sent a chum request to <Link to={`/user/:${request.receiver._id}`}>@{request.receiver.username}</Link></span>
                                     <div id="request-buttons">
                                         <button>Undo</button>

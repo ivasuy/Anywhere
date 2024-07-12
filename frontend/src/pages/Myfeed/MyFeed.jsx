@@ -50,39 +50,46 @@ const MyFeed = () => {
   };
 
   return (
-    <div id="myFeed">
-      <Metadata title="My Feed" />
-      <div id="topMyFeed">
-        <DrawerRight />
-        <TopNav />
-      </div>
-      <div id="bottomMyFeed">
-        <div id="bottomLeftMyFeed">
-          <Post data={postData} />
-          <Post data={postData} />
-          <Post data={postData} />
-          <Post data={postData} />
-          <Post data={postData} />
-          <Post data={postData} />
-          <Post data={postData} />
-          <Post data={postData} />
-          <Post data={postData} />
-          <Post data={postData} />
-          <Post data={postData} />
+    <div id="myFeedContainer">
+
+      <div id="myFeed">
+        <Metadata title="My Feed" />
+        <div id="topMyFeed">
+          <DrawerRight />
+          <TopNav />
         </div>
-        <div id="bottomRightMyFeed">
-          {/* <UserDetailsCard /> */}
-          {user && <UserCardAndPhotos self={true} user={user} />}
-          <div id="suggestedUsers">
-            <h1>Suggested Users</h1>
-            <div id="userList">
-              <SuggestedUsers />
+        <div id="bottomMyFeed">
+          <div id="currentUserCard">
+            <h1>Current user</h1>
+            {user && <UserCardAndPhotos self={true} user={user} />}
+          </div>
+          <div id="bottomLeftMyFeed">
+            <Post data={postData} />
+            <Post data={postData} />
+            <Post data={postData} />
+            <Post data={postData} />
+            <Post data={postData} />
+            <Post data={postData} />
+            <Post data={postData} />
+            <Post data={postData} />
+            <Post data={postData} />
+            <Post data={postData} />
+            <Post data={postData} />
+          </div>
+
+          <div id="bottomRightMyFeed">
+            <div id="suggestedUsers">
+              <h1>Suggested Users</h1>
+              <div id="userList">
+                <SuggestedUsers />
+              </div>
             </div>
           </div>
+
         </div>
-      </div>
-      <div>
-        <FloatingNav />
+        <div>
+          <FloatingNav />
+        </div>
       </div>
     </div>
   );

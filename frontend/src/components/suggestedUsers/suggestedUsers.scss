@@ -1,17 +1,10 @@
 #suggestedUsers {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-    // background-color: red;
-    #userList {
-        height: 70vh;
-        overflow: auto;
-        scrollbar-width: none;
-        /* Firefox */
-        -ms-overflow-style: none;
+    #suggestedUser {
+        margin-bottom: 10px;
     }
-
-    #userList::-webkit-scrollbar {
-        display: none;
-        /* Chrome, Safari, and Opera */
-    }
-
 }

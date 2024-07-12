@@ -1,9 +1,12 @@
 #UserDetailsCard {
 
-    font: 300 2vh "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS";
+    font: 300 15px "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS";
     border: 1px solid gray;
-    border-radius: 10px;
-    margin: 10px;
+    border-radius: 20px;
+    box-sizing: border-box;
+    height: 100%;
+    width: 400px;
+
 
     a {
         text-decoration: none;
@@ -28,7 +31,7 @@
 
             img {
                 object-fit: cover;
-                width: 10vw;
+                width: 100px;
                 border-radius: 100%;
             }
 
@@ -67,7 +70,7 @@
             }
 
             h1 {
-                font: 400 3vh "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS";
+                font: 400 20px "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS" !important;
                 color: white;
             }
 
@@ -76,7 +79,7 @@
                 padding: 18px;
                 margin: 5px;
                 border-radius: 20px;
-                width: 10vw;
+                width: 150px;
 
                 a {
                     text-decoration: none;
@@ -123,8 +126,7 @@
                 width: 100%;
                 border: none;
                 border-radius: 10px;
-                font-size: 1.8vh;
-                font: 200 2vh "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS";
+                font: 200 15px "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS";
                 background-color: rgb(0, 0, 0);
                 color: white;
                 border: 0.1px solid yellow;
@@ -176,7 +178,7 @@
         border-radius: 10px;
         border: none;
         font-size: 1.8vh;
-        font: 200 2vh "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS";
+        font: 200 15px "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS";
 
     }
 
@@ -193,62 +195,8 @@
 }
 
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 800px) {
     #UserDetailsCard {
-        // margin-left: 20px;
-        // width: 93vw;
-        width: 90%;
-        // border: 2px solid green;
-        margin-right: 100px;
-        margin-left: 0;
-        // padding: 0;
-    }
-
-    #topUserDetailsCard {
-        // width: 80vw;
-        display: flex;
-        flex-direction: column !important;
-        justify-content: center;
-        align-items: center;
-        gap: 2px !important;
-
-        #imageAndName {
-            display: flex;
-            flex-direction: row !important;
-            justify-content: space-between !important;
-            align-items: center;
-            gap: 10vw;
-
-            img {
-                width: 25vw;
-            }
-        }
-
-        #credDetails {
-            display: flex;
-            flex-direction: row !important;
-        }
-    }
-
-    #bottomUserCardDetails {
-        #buttonsbottomUserCardDetails {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-evenly;
-            align-items: center;
-
-            button {
-                height: 5vh;
-                margin: 10px;
-                width: 12vw;
-                border: none;
-                border-radius: 10px;
-            }
-
-            button:hover {
-                background-color: red;
-                cursor: pointer;
-            }
-        }
+        width: 360px;
     }
 }

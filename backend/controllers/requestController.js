@@ -82,6 +82,12 @@ export const acceptChumRequest = TryCatch(async (req, res, next) => {
 
     const members = [request.sender._id, request.receiver._id];
 
+    await Notification.create({
+        user: senderId,
+        type: "chumRequest",
+        message: `${req.user.name} has accepted your chum request.`,
+    });
+
 
     emitEvent(req, REFETCH_CHATS, members);
 
@@ -89,6 +95,26 @@ export const acceptChumRequest = TryCatch(async (req, res, next) => {
         success: true,
         message: "Friend Request Accepted",
         senderId: senderId,
+    });
+});
+
+// Controller to fetch all users from the logged-in user's chumList
+export const allChumsList = TryCatch(async (req, res) => {
+    const loggedInUser = req.user._id;
+
+    // Find the logged-in user and populate the chumList
+    const user = await userModel.findById(loggedInUser).populate('chumList');
+
+    if (!user) {
+        return res.status(404).json({
+            success: false,
+            message: "User not found",
+        });
+    }
+
+    res.status(200).json({
+        success: true,
+        chums: user.chumList,
     });
 });
 
@@ -173,6 +199,48 @@ export const checkBeholdUser = TryCatch(async (req, res, next) => {
     });
 });
 
+export const deleteChum = TryCatch(async (req, res) => {
+    const { userId } = req.body;
+    const loggedInUserId = req.user._id;
+
+    // console.log("userId", userId)
+    // console.log("loggedInUserId", loggedInUserId)
+
+    if (!userId) {
+        return res.status(400).json({
+            success: false,
+            message: "User ID is required"
+        });
+    }
+
+    // Find the logged-in user and the user to remove from chumList
+    const loggedInUser = await userModel.findById(loggedInUserId);
+    const userToRemove = await userModel.findById(userId);
+
+    if (!loggedInUser || !userToRemove) {
+        return res.status(404).json({
+            success: false,
+            message: "User not found"
+        });
+    }
+
+    // Remove each user from the other's chumList
+    loggedInUser.chumList = loggedInUser.chumList.filter(id => id.toString() !== userId);
+    userToRemove.chumList = userToRemove.chumList.filter(id => !id.equals(loggedInUserId));
+
+    // console.log("loggedInUserChumList", loggedInUser.chumList)
+    // console.log("userToRemoveChumList", userToRemove.chumList)
+
+    // Save the changes to both users
+    await loggedInUser.save();
+    await userToRemove.save();
+
+    return res.status(200).json({
+        success: true,
+        message: "Chum removed successfully"
+    });
+})
+
 export const checkChumStatus = TryCatch(async (req, res, next) => {
     const { userId } = req.body;
     const loggedInUserId = req.user._id;
@@ -183,12 +251,13 @@ export const checkChumStatus = TryCatch(async (req, res, next) => {
         return res.status(404).json({ success: false, message: "Logged-in User not found" });
     }
 
-    const isUserInChumList = loggedInUser.chumList.some(chum => chum._id.toString() === userId);
+    const isUserInChumList = loggedInUser.chumList.find(chum => chum._id.toString() === userId);
 
     if (isUserInChumList) {
         return res.status(200).json({
-            success: true, request: true,
-            request_sender: true,
+            success: true,
+            request: false,
+            request_sender: false,
             chum: true,
             userId: userId
         });
@@ -203,8 +272,6 @@ export const checkChumStatus = TryCatch(async (req, res, next) => {
 
 
     if (request) {
-        // console.log("request.sender", request.sender)
-        // console.log("loggedInUserId", loggedInUserId)
         if (request.sender.equals(loggedInUserId)) {
             return res.status(200).json({
                 request: true,
@@ -212,7 +279,8 @@ export const checkChumStatus = TryCatch(async (req, res, next) => {
                 chum: false,
                 userId: userId
             });
-        } else if (request.sender.equals(userId)) {
+        }
+        else if (request.sender.equals(userId)) {
             return res.status(200).json({
                 request: true,
                 request_sender: false,
@@ -283,7 +351,7 @@ export const getPurposeRequests = TryCatch(async (req, res) => {
     if (purpose === "accept") {
         const request = await Request.findOne({ sender: userId, receiver: req.user._id }).populate("sender receiver")
 
-        console.log(request);
+        // console.log(request);
 
         return res.status(200).json({
             success: true,
