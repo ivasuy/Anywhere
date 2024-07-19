@@ -52,7 +52,7 @@ const Login = () => {
                 </div>
                 <form onSubmit={handleSubmit}>
                     <h1>Login in to Anywhere</h1>
-                    <div id="loginUsername">
+                    <div className="loginUsername">
                         <PersonIcon size={25} />
                         <input
                             type="text"
@@ -73,16 +73,15 @@ const Login = () => {
                         />
                     </div>
                     <div id="forgotpass" >
-                        <Link to="/password/forgot" style={{ color: "white" }}>Forgot Password ?</Link>
+                        <Link to="/password/forgot" style={{ color: "black" }}>Forgot Password ?</Link>
                     </div>
                     <input type="submit" value="Login" id="loginBtn" />
                 </form>
             </div>
-            <div id="loginImage">
+            {/* <div id="loginImage">
                 <h1>Nearby users</h1>
 
-                <Carousel1 />
-            </div>
+            </div> */}
         </div>
     );
 };

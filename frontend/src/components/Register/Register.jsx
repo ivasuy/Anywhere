@@ -85,7 +85,7 @@ const Register = () => {
         </div>
         <form onSubmit={handleSubmit}>
           <h1>Register on Anywhere</h1>
-          <div id="loginUsername">
+          <div className="loginUsername">
             <FaceIcon />
             <input
               type="text"
@@ -98,7 +98,7 @@ const Register = () => {
             // onChange={(e) => setLoginEmail(e.target.value)}
             />
           </div>
-          <div id="loginUsername">
+          <div className="loginUsername">
             <MailOutlineIcon />
             <input
               type="email"
@@ -111,7 +111,7 @@ const Register = () => {
             // onChange={(e) => setLoginEmail(e.target.value)}
             />
           </div>
-          <div id="loginUsername">
+          <div className="loginUsername">
             <PersonIcon />
             <input
               type="text"
@@ -145,10 +145,9 @@ const Register = () => {
           <input type="submit" value="Register" id="loginBtn" />
         </form>
       </div>
-      <div id="loginImage">
+      {/* <div id="loginImage">
         <h1>Nearby users</h1>
-        {/* <Carousel1 /> */}
-      </div>
+      </div> */}
     </div>
   );
 };

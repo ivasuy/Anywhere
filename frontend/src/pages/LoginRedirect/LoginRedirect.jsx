@@ -28,7 +28,7 @@ const LoginRedirect = () => {
                     Policy, and our default Notification Settings.
                 </p>
             </div>
-            <div id="right">
+            <div id="right" >
                 <span>Anywhere</span>
 
                 {/* <HomeLoader /> */}

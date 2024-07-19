@@ -1,18 +1,19 @@
 .loginRegisterContainer {
   display: flex;
-  flex-direction: row;
   justify-content: center;
-  width: 100vw;
-  height: fit-content;
-  // background-image: linear-gradient(to right, #fed4d5, #eeeeee);
   align-items: center;
-  background-color: rgb(0, 0, 0, 0.80);
+  background-color: black;
+  height: 100%;
+  width: 100%;
+  color: white !important;
+  background-image: url('../../assets/flower1.jpg');
+  object-fit: cover;
 
   #loginImage {
     text-align: center;
 
     h1 {
-      font: 300 5vmax "Shadows Into Light", cursive;
+      font: 300 40px "Shadows Into Light", cursive;
     }
   }
 }
@@ -22,21 +23,16 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 80vh;
-  margin: 100px;
-  border: 0.5px solid black;
-  border-radius: 3px;
-  box-shadow: 0 10px 40px rgba(90, 68, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.516);
+  border-radius: 20px;
+  padding: 10px;
+  width: 25%;
 
   #loginHead {
-
     h1 {
-      font: 300 5vmax "Shadows Into Light", cursive;
+      font: 300 60px "Shadows Into Light", cursive;
+      color: white;
     }
-  }
-
-  #loginHead:hover {
-    border-radius: 10px;
   }
 
   form {
@@ -44,49 +40,50 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 20px;
-    padding-bottom: 60px;
-    max-width: 100vw;
-
-    text-align: end;
+    width: 100%;
 
     h1 {
-      font: 300 2.5vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      font: 600 20px "Shadows Into Light",
+        cursive,
         sans-serif;
+      color: white;
     }
 
     #forgotpass {
       // background-color: red;
-      text-align: end;
-      width: 32vw;
+      padding: 2px;
+      border-radius: 10px;
       margin: 10px;
-
-      a {
-        font-style: none;
-        color: black;
-        padding: 10px;
-        // border: 1px solid red;
-        text-decoration: none;
-        font: 300 1vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
-          sans-serif;
-      }
-    }
-
-    #loginUsername {
       display: flex;
       justify-content: center;
       align-items: center;
 
+      a {
+        font-style: none;
+        color: white !important;
+        padding: 5px;
+        text-decoration: none;
+        font: 300 10px "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+      }
+    }
+
+    .loginUsername {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 10px;
+      width: 80%;
+
       input {
-        height: 5vh;
-        width: 30vw;
-        border: none;
-        border-bottom: 0.2px solid white;
-        margin: 10px;
         background-color: transparent;
-        border-radius: 10px;
-        padding: 10px;
         color: white;
+        outline: none;
+        padding: 20px;
+        border-radius: 10px;
+        border: none;
+        width: 100%;
+        border: 1px solid white;
       }
     }
 
@@ -94,29 +91,30 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      width: 80%;
 
       input {
-        height: 5vh;
-        width: 30vw;
-        border: none;
-        border-bottom: 0.2px solid white;
-        margin: 10px;
-        background-color: transparent;
         border-radius: 10px;
-        padding: 10px;
-        color: white
+        background-color: transparent;
+        color: white;
+        outline: none;
+        padding: 20px;
+        width: 100%;
+        border: 1px solid white;
       }
 
     }
 
     #loginBtn {
-      width: 30vw;
       height: 7vh;
+      width: 40%;
       margin: 10px;
       border: none;
       border-radius: 5px;
+      background-color: rgba(255, 255, 0, 0.799);
+      color: black;
       transition: background-color 0.3s ease-in;
-      font: 300 1.2vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      font: 300 16px "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
         sans-serif;
     }
 
@@ -161,12 +159,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    // width: 100vw;
-
-    // background-color: hotpink;
 
     #loginForm {
       border: 0px;
+      width: 90%;
+      height: 93%;
 
       #loginHead {
 
@@ -176,32 +173,21 @@
         padding: 0;
       }
 
-      #loginUsername {
+      .loginUsername {
         margin: 10px;
 
-        input {
-          width: 70vw;
-          height: 7vh;
-        }
+        input {}
       }
 
       #loginPassword {
         margin: 0px;
 
-        input {
-          width: 70vw;
-          height: 7vh;
-        }
+        input {}
       }
 
       #loginHead {
-        position: relative;
-        top: 60px;
-
-        // background-color: red;
         h1 {
-          font: 300 8vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
-            sans-serif;
+          font: 300 50px "Shadows Into Light", cursive;
         }
       }
 
