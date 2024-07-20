@@ -89,5 +89,59 @@ const upvotePost = TryCatch(async (req, res, next) => {
     res.status(200).json({ success: true, message: "Post upvoted successfully" });
 });
 
+export const fetchMyFeedPosts = TryCatch(async (req, res) => {
+
+    const loggedInUserId = req.user._id;
+    // Find posts where loggedInUserId is in the sharedWith array
+    const posts = await Post.find({
+        sharedWith: loggedInUserId,
+        accessibility: "private"
+    })
+        // Populate the referenced fields for detailed information
+        .populate('creator')
+        .populate('sharedWith')
+        .populate('comments.user')
+        .populate('shares.user')
+        .populate('savedBy')
+        .sort({ dateShared: -1 });
+
+    // Send the posts as a response
+    res.status(200).json({ success: true, posts });
+
+
+})
+
+export const fetchAllUserPosts = TryCatch(async (req, res) => {
+
+    const userId = req.body.id;
+
+    const privatePosts = await Post.find({
+        creator: userId,
+        accessibility: "private"
+    })
+        .populate('sharedWith')
+        .populate('comments.user')
+        .populate('shares.user')
+        .populate('savedBy')
+        .sort({ dateShared: -1 });
+
+    const publicPosts = await Post.find({
+        creator: userId,
+        accessibility: "public"
+    })
+        .populate('sharedWith')
+        .populate('comments.user')
+        .populate('shares.user')
+        .populate('savedBy')
+        .sort({ dateShared: -1 });
+
+    res.status(200).json({
+        success: true,
+        privatePosts,
+        publicPosts
+    })
+
+})
+
 
 export { createNewPost, upvotePost };

@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit"
 import { userReducer } from "./reducers/userReducer";
 import { locationReducer, userLocationReducer } from "./reducers/locationReducer";
-import { newPostReducer } from "./reducers/postReducer";
+import { myfeedPostsReducer, newPostReducer } from "./reducers/postReducer";
 import { allChumsReducer } from "./reducers/requestReducer";
 import { allChatReducer } from "./reducers/chatReducer";
 import { allNotificationsReducer } from "./reducers/notificationReducer";
@@ -15,6 +15,7 @@ const store = configureStore({
         all_chats: allChatReducer,
         all_notifications: allNotificationsReducer,
         all_chums: allChumsReducer,
+        myfeed_posts: myfeedPostsReducer
     },
 })
 

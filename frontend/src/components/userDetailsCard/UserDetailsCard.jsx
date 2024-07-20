@@ -50,19 +50,17 @@ const UserDetailsCard = ({ self, user }) => {
         purpose
       }, config);
 
-      console.log(data);
+      // console.log(data);
       return data.request;
 
     } catch (error) {
-      console.log("Error occurred in getting request:", error.message);
+      // console.log("Error occurred in getting request:", error.message);
       throw error; // Re-throw the error to handle it in the calling function
     }
   }
 
   const handleRemoveChum = async (e) => {
     e.preventDefault();
-
-    console.log("gonde bache")
 
     try {
 
@@ -74,8 +72,6 @@ const UserDetailsCard = ({ self, user }) => {
       const { data } = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/v1/request/delete-chum`, {
         userId: user._id,
       }, config);
-
-      console.log(data);
 
       fetchCount();// Assuming this updates the UI
       checkChumStatus()
@@ -96,9 +92,6 @@ const UserDetailsCard = ({ self, user }) => {
         return;
       }
 
-      console.log("Delete request:", request);
-      console.log("requestid", request._id);
-
       const config = {
         headers: { "Content-Type": "application/json" },
         withCredentials: true
@@ -109,7 +102,6 @@ const UserDetailsCard = ({ self, user }) => {
         accept: false
       }, config);
 
-      console.log(data);
 
       fetchCount();// Assuming this updates the UI
       checkChumStatus()
@@ -124,9 +116,6 @@ const UserDetailsCard = ({ self, user }) => {
 
     const request = await getPurposeRequest("accept");
 
-    console.log("accept request success", request);
-
-
     const requestId = request._id
 
     try {
@@ -140,8 +129,6 @@ const UserDetailsCard = ({ self, user }) => {
         requestId: requestId,
         accept: true
       }, config);
-
-      console.log(data);
 
       fetchCount();
       checkChumStatus()
@@ -183,7 +170,6 @@ const UserDetailsCard = ({ self, user }) => {
         { userId: user._id },
         config
       );
-      // console.log("success", data.message);
       setcheckBehold(true); // Update the state directly
 
       fetchCount(user); // Update the count after a successful "behold" request
@@ -203,7 +189,7 @@ const UserDetailsCard = ({ self, user }) => {
         { userId: user._id },
         config
       );
-      // console.log("success", data.isInBeholdList);
+
       setcheckBehold(data.isInBeholdList);
       fetchCount(user); // Update the count after a successful "behold" request
     } catch (error) {
@@ -223,7 +209,7 @@ const UserDetailsCard = ({ self, user }) => {
         { userId: user._id },
         config
       );
-      // console.log("success", data.message);
+
       setcheckBehold(false);
 
       fetchCount(); // Update the count after a successful "behold" request
@@ -245,12 +231,9 @@ const UserDetailsCard = ({ self, user }) => {
         config
       );
 
-      // console.log(data);
-      // console.log('API response:', data);
+
 
       const { request, request_sender, chum, userId } = data;
-
-      console.log("data lode ", userId, request_sender, request);
 
       setrequestFlag(request);
       setrequest_senderFlag(request_sender);
@@ -278,7 +261,7 @@ const UserDetailsCard = ({ self, user }) => {
         { userId: user._id },
         config
       );
-      // console.log("success", data.message);
+
 
       if (data.success) {
         setcheckChum(!checkChum);
@@ -304,11 +287,6 @@ const UserDetailsCard = ({ self, user }) => {
         config
       );
 
-      // console.log(data.chat);
-      // if (data.chat) {
-      //   localStorage.setItem('reloadOnChatCreate', 'true');
-
-      // }
 
     } catch (error) {
       console.log("error", error.response?.data?.message || error.message);
@@ -318,6 +296,7 @@ const UserDetailsCard = ({ self, user }) => {
 
   useEffect(() => {
     // if (user) {
+    console.log("lode ka fetch count")
     fetchCount();
     checkBeholdUser();
     checkChumStatus();
