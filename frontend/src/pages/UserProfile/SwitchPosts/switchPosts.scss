@@ -27,8 +27,8 @@
 }
 
 .posts {
-    width: 100%;
-    text-align: center;
+    width: 80%;
+    // text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -46,6 +46,10 @@
 
     .public-posts,
     .private-posts {
+        width: 100%;
+    }
+
+    .posts {
         width: 100%;
     }
 }

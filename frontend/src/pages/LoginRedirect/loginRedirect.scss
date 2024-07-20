@@ -11,6 +11,11 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    text-align: center;
+
+    span {
+      font: 300 2vmax "Shadows Into Light", cursive;
+    }
 
     h1 {
       font: 300 5vmax "Shadows Into Light", cursive;
@@ -21,15 +26,14 @@
       height: 7vh;
       margin: 10px;
       border: none;
-      border-radius: 5px;
+      border-radius: 20px;
+      background-color: yellow;
       transition: background-color 0.3s ease-in;
       font: 300 1.2vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
         sans-serif;
     }
 
     button:hover {
-      background-color: rgb(157, 157, 157);
-      border-radius: 10px;
       cursor: pointer;
     }
 
@@ -42,34 +46,32 @@
 
     #signupBut {
       background-color: black;
+      border: 1px solid yellow;
       color: white;
     }
 
     #signupBut:hover {
-      background-color: rgb(157, 157, 157);
+      background-color: yellow;
+      color: black;
     }
   }
 
   #right {
     flex: 6;
-    // border: 2px solid red;
-
-    // height: fit-content;
-    animation: example 10s infinite;
-    // animation-duration: 4s;
-    // max-width: 40vw;
-
     padding: 20px;
-    background-color: red;
-    // min-width: 80vw;
-    // transition: background-color ease-in 1s;
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
 
     span {
-      // font: 200 7vmax "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
-      //   sans-serif;
+      animation: example 10s infinite;
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       font: 300 8vmax "Shadows Into Light", cursive;
     }
   }
@@ -109,15 +111,19 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      // margin-top: 10vh;
+      max-height: fit-content !important;
+      flex: 0;
+
     }
 
     #right {
-      // height: fit-content;
-      display: flex;
-      justify-content: center;
-      align-items: end;
-      border-radius: 0px 0px 20px 20px;
+      flex: 0;
+
+      span {
+        border-radius: 20px;
+        height: fit-content;
+        padding: 10px;
+      }
     }
   }
 }

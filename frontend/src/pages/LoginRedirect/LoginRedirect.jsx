@@ -18,7 +18,7 @@ const LoginRedirect = () => {
                     </button>
                 </Link>
 
-                <div>or</div>
+                <span>or</span>
                 <Link to="/login">
                     <button >Login to Anywhere</button>
                 </Link>
