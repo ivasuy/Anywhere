@@ -1,0 +1,40 @@
+#exploreNearbyContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    #exploreNearby {
+        width: 100%;
+
+        #topExploreNearby {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            #exploreNearby-subheading {
+                width: fit-content;
+                font: 300 25px "Shadows Into Light", cursive;
+                color: yellow;
+                background-color: rgb(0, 208, 255);
+                border-radius: 10px;
+            }
+        }
+
+        #bottomExploreNearby {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            width: 100%;
+
+            #exploreNearbyPosts {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+            }
+
+        }
+    }
+}

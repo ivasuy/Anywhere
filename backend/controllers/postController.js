@@ -143,5 +143,24 @@ export const fetchAllUserPosts = TryCatch(async (req, res) => {
 
 })
 
+export const fetchExploreNearbyPosts = TryCatch(async (req, res) => {
+    const loggedInUserId = req.user._id;
+
+    const posts = await Post.find({
+        sharedWith: loggedInUserId,
+        accessibility: "public"
+    })
+        // Populate the referenced fields for detailed information
+        .populate('creator')
+        .populate('sharedWith')
+        .populate('comments.user')
+        .populate('shares.user')
+        .populate('savedBy')
+        .sort({ dateShared: -1 });
+
+    // Send the posts as a response
+    res.status(200).json({ success: true, posts });
+})
+
 
 export { createNewPost, upvotePost };

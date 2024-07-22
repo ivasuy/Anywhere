@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -15,10 +15,77 @@ import { BiUpvote } from "react-icons/bi";
 import { BiSolidUpvote } from "react-icons/bi";
 import { BiDownvote } from "react-icons/bi";
 import { BiSolidDownvote } from "react-icons/bi";
+import { useDispatch, useSelector } from "react-redux";
+
 import "./post.scss";
+import axios from "axios";
 
 const Post = ({ data }) => {
-  const { mediaFiles, caption } = data;
+
+  const { mediaFiles, caption, creator } = data;
+
+  const [count, setCount] = useState({});
+  const [checkBehold, setcheckBehold] = useState(false);
+
+  const { user } = useSelector((state) => state.user);
+
+
+  const checkBeholdUser = async () => {
+    try {
+      const config = {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      };
+      const { data } = await axios.put(
+        `${process.env.REACT_APP_BACKEND_URL}/api/v1/request/check-behold`,
+        { userId: user._id },
+        config
+      );
+
+      setcheckBehold(data.isInBeholdList);
+      fetchCount(user); // Update the count after a successful "behold" request
+    } catch (error) {
+      console.log("error", error.response?.data?.message || error.message);
+    }
+  }
+
+  const handleBeholdUser = async (e) => {
+    e.preventDefault();
+    try {
+      const config = {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      };
+      const { data } = await axios.put(
+        `${process.env.REACT_APP_BACKEND_URL}/api/v1/request/behold`,
+        { userId: user._id },
+        config
+      );
+      setcheckBehold(true); // Update the state directly
+
+      fetchCount(user); // Update the count after a successful "behold" request
+    } catch (error) {
+      console.log("error", error.response?.data?.message || error.message);
+    }
+  };
+
+  const fetchCount = async () => {
+    try {
+      const config = {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      };
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/api/v1/request/all-count`,
+        { userId: user._id },
+        config
+      );
+      setCount(data.count);
+
+    } catch (error) {
+      console.log("error", error.response?.data?.message || error.message);
+    }
+  };
 
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
@@ -63,8 +130,8 @@ const Post = ({ data }) => {
       </div>
       <div id="captionAndOptions">
         <div id="options">
-          {mediaFiles[0]?.url && (
-            <img src={mediaFiles[0].url} alt="Profile" />
+          {creator.avatar && (
+            <img src={creator.avatar} alt="Profile" />
           )}
           <div>John Doe</div>
           <span id="behold">behold</span>

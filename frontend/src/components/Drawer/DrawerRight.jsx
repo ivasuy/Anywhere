@@ -25,7 +25,7 @@ const DrawerRight = () => {
       <div id="hamburgerIcon">
         <RxHamburgerMenu
           onClick={toggleDrawer}
-          size={50}
+          size={30}
           style={{ color: "rgb(0, 110, 255)" }}
         />
       </div>
