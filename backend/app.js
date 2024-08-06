@@ -31,8 +31,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cors({
     // origin: "https://668d220d5b0a9f4274416f90--stately-heliotrope-62c871.netlify.app", // Add your frontend URL here
-    origin: "https://anywhere-co.vercel.app", // Add your frontend URL here
-    // origin: "http://localhost:3000", // Add your frontend URL here
+    // origin: "https://anywhere-co.vercel.app", // Add your frontend URL here
+    origin: "http://localhost:3000", // Add your frontend URL here
     // origin: process.env.FRONTEND_URL, // Add your frontend URL here
     credentials: true, // Allow cookies to be sent with the request
     methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed methods
@@ -48,5 +48,6 @@ app.use("/api/v1/request", requestRouter)
 app.use("/api/v1/notifications", notificationRouter)
 
 app.use(errorMiddleware);
+
 
 export default app;
