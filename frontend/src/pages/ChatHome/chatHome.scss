@@ -27,18 +27,19 @@
         display: flex;
         flex-direction: row;
         color: white;
+        width: 100%;
 
 
 
 
         #left-midChatHome {
-            flex: 2;
+            // flex: 2;
             border-radius: 20px;
             overflow: auto;
             scrollbar-width: none;
             /* Firefox */
             -ms-overflow-style: none;
-
+            width: 35%;
         }
 
         #left-midChatHome::-webkit-scrollbar {
@@ -47,9 +48,10 @@
         }
 
         #right-midChatHome {
-            flex: 4;
+            // flex: 4;
             // border: 1px solid green;
             border-radius: 20px;
+            width: 65%;
         }
     }
 
@@ -87,6 +89,50 @@
             padding: 10px;
             height: 40%;
             width: 95%;
+        }
+    }
+}
+
+@media screen and (max-width: 900px) {
+    #chatHome {
+        margin: 0px;
+        border-radius: 0px;
+        padding: 0;
+        height: 100%;
+        border-radius: 0px;
+
+        #leftChatHome {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #midChatHome {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            border-radius: 0px;
+
+            #left-midChatHome {
+                width: 100%;
+                padding: 0;
+                margin: 0;
+                height: 100%;
+
+            }
+
+            #right-midChatHome {
+                // display: none;
+                width: 100%;
+                padding: 0;
+                margin: 0;
+                height: 100%;
+
+            }
+        }
+
+        #rightChatHome {
+            // display: none;
+
         }
     }
 }

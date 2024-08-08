@@ -25,7 +25,7 @@ const ChatNav = ({ activeItem, onNavClick }) => {
                     onClick={() => onNavClick('myChats')}
                 >
                     <div>
-                        <CiChat2 size={40} color='white' />
+                        <CiChat2 size={25} color='white' />
                     </div>
                     <span>My Chats</span>
                 </div>
@@ -34,7 +34,7 @@ const ChatNav = ({ activeItem, onNavClick }) => {
                     onClick={() => onNavClick('groups')}
                 >
                     <div>
-                        <MdGroups2 size={40} color='white' />
+                        <MdGroups2 size={25} color='white' />
                     </div>
                     <span>My groups</span>
                 </div>
@@ -43,7 +43,7 @@ const ChatNav = ({ activeItem, onNavClick }) => {
                     onClick={() => onNavClick('unknown')}
                 >
                     <div>
-                        <GiMagicHat size={40} color='white' />
+                        <GiMagicHat size={25} color='white' />
                     </div>
                     <span>New Chats</span>
                 </div>
