@@ -66,7 +66,7 @@ const ChatHome = () => {
                             />
                         </div>
                         <div id="right-midChatHome">
-                            <ChatSpace selectedChat={selectedChat} />
+                            <ChatSpace selectedChat={selectedChat} view={"default"} />
                         </div>
                     </div>
                     <div id="rightChatHome">
