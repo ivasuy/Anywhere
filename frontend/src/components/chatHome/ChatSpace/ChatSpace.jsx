@@ -8,8 +8,9 @@ import "./ChatSpace.scss";
 import { useSelector } from 'react-redux';
 import { IoMdArrowBack } from "react-icons/io";
 import userFace from '../../../assets/userFace.jpg'
+import MessageComponent from '../../Message/MessageComponent';
 
-const ChatSpace = ({ selectedChat, setsecView }) => {
+const ChatSpace = ({ selectedChat, setsecView, view }) => {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const { user } = useSelector((state) => state.user);
 
@@ -22,7 +23,7 @@ const ChatSpace = ({ selectedChat, setsecView }) => {
     }, [selectedChat]);
 
     if (!selectedChat) {
-        return <div id='chatSpace'>Select a chat to start messaging</div>;
+        return <div className='chatSpaceText'>Select a chat to start messaging</div>;
     }
 
     const isGroupChat = selectedChat.groupChat;
@@ -41,7 +42,7 @@ const ChatSpace = ({ selectedChat, setsecView }) => {
         selectedChat ? (
             <div id='chatSpace'>
                 <div id="chatSpace-topNav">
-                    <div id="left-chatSpace-topNav" onClick={() => setsecView('chatDetails')}>
+                    <div id="left-chatSpace-topNav" onClick={view !== "default" ? () => setsecView('chatDetails') : null}>
                         <div id="chatName">
                             <div id="dp">
                                 <img src={userFace} alt="userFace" />
@@ -71,6 +72,16 @@ const ChatSpace = ({ selectedChat, setsecView }) => {
                 <div id="chatSpace-restAll">
                     <div id="chatSpace-messages">
                         {/* Messages will go here */}
+                        <MessageComponent />
+                        <MessageComponent />
+                        <MessageComponent />
+                        <MessageComponent />
+                        <MessageComponent />
+                        <MessageComponent />
+                        <MessageComponent />
+                        <MessageComponent />
+                        <MessageComponent />
+                        <MessageComponent />
                     </div>
                     <div id="chatSpaceTypeMessage">
                         <GrAttachment size={30} color='gray' />
@@ -80,7 +91,7 @@ const ChatSpace = ({ selectedChat, setsecView }) => {
                 </div>
             </div>
         ) : (
-            <div id='chatSpace'>Select a chat to start messaging</div>
+            <div className='chatSpaceText'>Select a chat to start Messaging</div>
         )
     );
 

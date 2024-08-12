@@ -4,16 +4,16 @@
     justify-content: center;
     align-items: center;
     // background-color: rgba(241, 245, 7);
-    background-color: rgba(58, 58, 58);
-    height: 96%;
+    background-color: rgb(58, 58, 58);
+    height: 97%;
     color: rgb(255, 255, 255);
     border-radius: 20px;
     margin: 10px;
     padding: 10px;
+    box-sizing: border-box;
 
     #leftChatHome {
-        flex: 1;
-        height: 96vh;
+        height: 100%;
         border-radius: 20px;
         padding: 10px;
     }
@@ -21,16 +21,14 @@
     #midChatHome {
         flex: 9;
         background-color: rgba(1, 1, 1, 0.9);
-        height: 92vh;
+        height: 100%;
         margin: 10px;
         border-radius: 20px;
         display: flex;
         flex-direction: row;
         color: white;
         width: 100%;
-
-
-
+        box-sizing: border-box;
 
         #left-midChatHome {
             // flex: 2;
@@ -51,20 +49,24 @@
             // flex: 4;
             // border: 1px solid green;
             border-radius: 20px;
+            height: 100%;
+            box-sizing: border-box !important;
             width: 65%;
+            // border: 1px solid red;
         }
     }
 
     #rightChatHome {
         flex: 3;
-        // height: 100vh;
-        height: 92vh;
+        height: 100%;
         border-radius: 20px;
         // padding: 10px;
         display: flex;
         flex-direction: column;
         gap: 10px;
         color: white;
+        box-sizing: border-box;
+
 
         #top-rightChatHome {
             // margin-bottom: 10px;
@@ -72,8 +74,9 @@
             flex: 1;
             border-radius: 20px;
             padding: 10px;
-            height: 40%;
-            width: 95%;
+            height: 50%;
+            width: 100%;
+            box-sizing: border-box;
             // overflow: auto;
             // -ms-overflow-style: none;
         }
@@ -87,8 +90,10 @@
             flex: 1;
             border-radius: 20px;
             padding: 10px;
-            height: 40%;
-            width: 95%;
+            height: 50%;
+            width: 100%;
+            box-sizing: border-box;
+
         }
     }
 }
